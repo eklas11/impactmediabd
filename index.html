@@ -1,0 +1,4337 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#0b0b14">
+    <meta name="description" content="IMPACT MEDIA - Premium YouTube Automation, Graphics Desgin, AI Apps & Web Development">
+    <title>IMPACT MEDIA | Digital Education Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script type="importmap">
+        {
+            "imports": {
+                "firebase/app": "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js",
+                "firebase/auth": "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js",
+                "firebase/database": "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --bg-primary: #0b0b14;
+            --bg-secondary: #10101d;
+            --bg-surface: #151525;
+            --bg-card: #1a1a2e;
+            --bg-card-hover: #212138;
+            --bg-elevated: #26263e;
+            --bg-input: #1a1a2e;
+            --accent: #6d5ef0;
+            --accent-light: #8b7cf5;
+            --accent-dark: #5a4bd4;
+            --accent-glow: rgba(109, 94, 240, 0.18);
+            --accent-glow-sm: rgba(109, 94, 240, 0.10);
+            --accent-border: rgba(109, 94, 240, 0.35);
+            --accent-hover: #7a6bf5;
+            --text-primary: #f0f2fa;
+            --text-secondary: #c8cbd9;
+            --text-muted: #9499ac;
+            --text-dark: #6b7082;
+            --border: #2a2a42;
+            --border-light: #3a3a55;
+            --border-accent: rgba(109, 94, 240, 0.25);
+            --success: #2ecc8f;
+            --success-bg: rgba(46, 204, 143, 0.12);
+            --error: #ef5b6b;
+            --error-bg: rgba(239, 91, 107, 0.12);
+            --warning: #f0a82e;
+            --warning-bg: rgba(240, 168, 46, 0.12);
+            --info: #4a9de0;
+            --info-bg: rgba(74, 157, 224, 0.12);
+            --font-bangla: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+            --font-english: 'Inter', sans-serif;
+            --radius-xs: 6px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --radius-2xl: 24px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.25);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.45);
+            --shadow-accent: 0 4px 20px rgba(109, 94, 240, 0.28);
+            --shadow-accent-lg: 0 8px 40px rgba(109, 94, 240, 0.35);
+            --transition-fast: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --max-width: 1280px;
+            --nav-height: 68px;
+            --bottom-nav-height: 64px;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 1.875rem;
+            --font-size-4xl: 2.25rem;
+            --font-size-5xl: 3rem;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-bangla);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+            min-height: 100dvh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding-bottom: var(--bottom-nav-height);
+            transition: background var(--transition-base);
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding-bottom: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: inherit;
+            font-size: inherit;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-light);
+            border-radius: var(--radius-full);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-dark);
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 32px;
+            }
+        }
+
+        @media (min-width: 1440px) {
+            .container {
+                padding: 0 48px;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: var(--radius-sm);
+        }
+
+        #loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-primary);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        #loading-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loader-text {
+            font-size: var(--font-size-sm);
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        #toast-container {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 360px;
+            width: calc(100% - 32px);
+            pointer-events: none;
+        }
+
+        @media (min-width: 768px) {
+            #toast-container {
+                top: 20px;
+                right: 20px;
+                width: auto;
+                min-width: 320px;
+            }
+        }
+
+        .toast {
+            padding: 14px 18px;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            line-height: 1.5;
+            box-shadow: var(--shadow-lg);
+            animation: toastIn 0.4s cubic-bezier(0.21, 1.02, 0.73, 1), toastOut 0.35s ease 3.5s forwards;
+            display: flex;
+
+            gap: 10px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            pointer-events: auto;
+            transform-origin: top right;
+        }
+
+        .toast-icon {
+            flex-shrink: 0;
+            font-size: 1.1rem;
+            margin-top: 1px;
+        }
+
+        .toast-success {
+            background: rgba(46, 204, 143, 0.95);
+            color: #fff;
+        }
+
+        .toast-error {
+            background: rgba(239, 91, 107, 0.95);
+            color: #fff;
+        }
+
+        .toast-info {
+            background: rgba(74, 157, 224, 0.95);
+            color: #fff;
+        }
+
+        .toast-warning {
+            background: rgba(240, 168, 46, 0.95);
+            color: #fff;
+        }
+
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateY(-16px) scale(0.92);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes toastOut {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(-12px) scale(0.92);
+            }
+        }
+
+        #modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 9000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        #modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            max-width: 520px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        #modal-overlay.active .modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .modal-title {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: var(--transition-fast);
+            background: var(--bg-card);
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+            background: var(--bg-elevated);
+            transform: rotate(90deg);
+        }
+
+        .modal-close svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .modal-body {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 1em;
+            height: 1em;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon-sm {
+            width: 16px;
+            height: 16px;
+        }
+
+        .icon-md {
+            width: 20px;
+            height: 20px;
+        }
+
+        .icon-lg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .icon-xl {
+            width: 32px;
+            height: 32px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            line-height: 1.4;
+            transition: var(--transition-base);
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+            user-select: none;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            transform: translateZ(0);
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+            transition-duration: 0.1s;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: var(--shadow-accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            box-shadow: var(--shadow-accent-lg);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0) scale(0.97);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-elevated);
+            border-color: var(--border-light);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent-light);
+            border: 1px solid var(--accent-border);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-glow-sm);
+            border-color: var(--accent-light);
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-muted);
+        }
+
+        .btn-ghost:hover {
+            color: var(--text-primary);
+            background: var(--bg-card);
+        }
+
+        .btn-danger {
+            background: var(--error);
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: #d94455;
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background: #25b87a;
+            transform: translateY(-1px);
+        }
+
+        .btn-sm {
+            padding: 8px 14px;
+            font-size: var(--font-size-xs);
+            border-radius: var(--radius-sm);
+        }
+
+        .btn-lg {
+            padding: 16px 32px;
+            font-size: var(--font-size-base);
+            border-radius: var(--radius-md);
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border-radius: var(--radius-md);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn .icon {
+            font-size: 1.1em;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .input-label {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.01em;
+        }
+
+        .input-field {
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-size: var(--font-size-sm);
+            transition: var(--transition-fast);
+            width: 100%;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-field:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow-sm), 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .input-field::placeholder {
+            color: var(--text-dark);
+        }
+
+        .input-field:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: var(--bg-surface);
+        }
+
+        textarea.input-field {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        select.input-field {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239499ac' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+
+        .input-error {
+            font-size: var(--font-size-xs);
+            color: var(--error);
+            font-weight: 500;
+        }
+
+        .input-hint {
+            font-size: var(--font-size-xs);
+            color: var(--text-dark);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            transition: var(--transition-base);
+        }
+
+        .card-hover:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-accent {
+            border-color: var(--accent-border);
+            background: linear-gradient(145deg, var(--bg-card), rgba(109, 94, 240, 0.06));
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            transition: var(--transition-fast);
+        }
+
+        .badge-accent {
+            background: var(--accent-glow-sm);
+            color: var(--accent-light);
+        }
+
+        .badge-success {
+            background: var(--success-bg);
+            color: var(--success);
+        }
+
+        .badge-warning {
+            background: var(--warning-bg);
+            color: var(--warning);
+        }
+
+        .badge-error {
+            background: var(--error-bg);
+            color: var(--error);
+        }
+
+        .badge-info {
+            background: var(--info-bg);
+            color: var(--info);
+        }
+
+        .badge-muted {
+            background: var(--bg-elevated);
+            color: var(--text-muted);
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-elevated) 50%, var(--bg-card) 75%);
+            background-size: 200% 100%;
+            animation: skeletonShimmer 1.5s infinite;
+            border-radius: var(--radius-md);
+        }
+
+        @keyframes skeletonShimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 48px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-state-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            opacity: 0.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .empty-state-icon svg {
+            width: 48px;
+            height: 48px;
+            fill: none;
+            stroke: var(--text-muted);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .empty-state-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .empty-state-text {
+            font-size: var(--font-size-sm);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        #desktop-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(11, 11, 20, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            height: var(--nav-height);
+            transition: var(--transition-base);
+        }
+
+        #desktop-nav.scrolled {
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            background: rgba(11, 11, 20, 0.97);
+        }
+
+        @media (min-width: 768px) {
+            #desktop-nav {
+                display: block;
+            }
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .nav-inner {
+                padding: 0 32px;
+            }
+        }
+
+        .nav-logo {
+            font-family: var(--font-english);
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            height: 100%;
+            max-height: var(--nav-height);
+        }
+
+        .nav-logo:hover {
+            opacity: 0.85;
+        }
+
+        .nav-logo span {
+            color: var(--accent-light);
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            max-height: 50px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: var(--transition-fast);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: var(--bg-card);
+        }
+
+        .nav-link.active {
+            color: var(--accent-light);
+            background: var(--accent-glow-sm);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: var(--radius-full);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-user-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px 6px 6px;
+            border-radius: var(--radius-full);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .nav-user-btn:hover {
+            border-color: var(--border-light);
+            background: var(--bg-elevated);
+        }
+
+        .nav-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: var(--font-size-xs);
+            color: #fff;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .nav-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .nav-username {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        #mobile-bottom-nav {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(11, 11, 20, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            height: var(--bottom-nav-height);
+            padding-bottom: env(safe-area-inset-bottom, 0);
+            transition: var(--transition-base);
+        }
+
+        @media (min-width: 768px) {
+            #mobile-bottom-nav {
+                display: none;
+            }
+        }
+
+        .bottom-nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: var(--transition-fast);
+            cursor: pointer;
+            border-radius: 0;
+            padding: 4px 0;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        .bottom-nav-item:active {
+            transform: scale(0.92);
+            transition-duration: 0.1s;
+        }
+
+        .bottom-nav-item .bn-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+            font-size: 1.2rem;
+        }
+
+        .bottom-nav-item .bn-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .bottom-nav-item.active {
+            color: var(--accent-light);
+        }
+
+        .bottom-nav-item.active .bn-icon {
+            transform: scale(1.1);
+        }
+
+        .bottom-nav-item.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 28px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 0 0 4px 4px;
+            animation: navDotIn 0.3s ease;
+        }
+
+        @keyframes navDotIn {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 28px;
+            }
+        }
+
+        #main-content {
+            padding-top: 0;
+            min-height: calc(100vh - var(--bottom-nav-height));
+            min-height: calc(100dvh - var(--bottom-nav-height));
+            transition: opacity 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            #main-content {
+                padding-top: var(--nav-height);
+                min-height: calc(100vh - var(--nav-height));
+                min-height: calc(100dvh - var(--nav-height));
+            }
+        }
+
+        .view {
+            display: none;
+            animation: viewIn 0.4s cubic-bezier(0.21, 1.02, 0.73, 1);
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        @keyframes viewIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero {
+            padding: 60px 0 40px;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(ellipse at 50% 0%, rgba(109, 94, 240, 0.12) 0%, transparent 65%);
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                padding: 80px 0 60px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero {
+                padding: 100px 0 80px;
+            }
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: var(--radius-full);
+            background: var(--accent-glow-sm);
+            color: var(--accent-light);
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border: 1px solid var(--accent-border);
+            animation: fadeDown 0.5s ease;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            animation: fadeUp 0.6s ease 0.1s both;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 28px;
+            line-height: 1.8;
+            animation: fadeUp 0.6s ease 0.2s both;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            animation: fadeUp 0.6s ease 0.3s both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            padding: 48px 0;
+        }
+
+        @media (min-width: 768px) {
+            .section {
+                padding: 64px 0;
+            }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: var(--font-size-sm);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        @media (min-width: 600px) {
+            .course-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .course-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+        }
+
+        @media (min-width: 1440px) {
+            .course-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .course-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition-base);
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            -webkit-tap-highlight-color: transparent;
+            animation: cardIn 0.5s ease both;
+        }
+
+        .course-card:active {
+            transform: scale(0.98);
+            transition-duration: 0.1s;
+        }
+
+        .course-card:hover {
+            border-color: var(--accent-border);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .course-card-thumb {
+            aspect-ratio: 16 / 9;
+            background: var(--bg-elevated);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .course-card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-slow);
+        }
+
+        .course-card:hover .course-card-thumb img {
+            transform: scale(1.05);
+        }
+
+        .course-card-thumb-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-elevated), var(--bg-surface));
+            color: var(--text-muted);
+        }
+
+        .course-card-thumb-placeholder svg {
+            width: 64px;
+            height: 64px;
+            fill: none;
+            stroke: var(--text-muted);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .course-card-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 2;
+        }
+
+        .course-card-body {
+            padding: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .course-card-category {
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            color: var(--accent-light);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .course-card-title {
+            font-size: var(--font-size-base);
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .course-card-desc {
+            font-size: var(--font-size-xs);
+            color: var(--text-muted);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .course-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
+        }
+
+        .course-price {
+            font-weight: 700;
+            font-size: var(--font-size-lg);
+            color: var(--text-primary);
+        }
+
+        .course-price-original {
+            font-size: var(--font-size-xs);
+            color: var(--text-dark);
+            text-decoration: line-through;
+            font-weight: 400;
+            margin-left: 6px;
+        }
+
+        .course-price-discounted {
+            color: var(--accent-light);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: var(--font-size-sm);
+            min-width: 600px;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        .data-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover td {
+            background: var(--bg-card);
+        }
+
+.dashboard-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 0;
+}
+
+@media (min-width: 1024px) {
+    .dashboard-layout {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+        .dashboard-sidebar {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: row;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .dashboard-sidebar::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .dashboard-sidebar {
+                flex-direction: column;
+                width: 240px;
+                overflow-x: visible;
+                padding-bottom: 0;
+                position: sticky;
+                top: calc(var(--nav-height) + 24px);
+            }
+        }
+
+        .dashboard-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            white-space: nowrap;
+            flex-shrink: 0;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        .dashboard-nav-item:active {
+            transform: scale(0.95);
+            transition-duration: 0.1s;
+        }
+
+        .dashboard-nav-item:hover {
+            color: var(--text-primary);
+            background: var(--bg-card);
+        }
+
+        .dashboard-nav-item.active {
+            color: var(--accent-light);
+            background: var(--accent-glow-sm);
+            border-left: 3px solid var(--accent);
+        }
+
+        .dashboard-nav-item .dni-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            width: 22px;
+            flex-shrink: 0;
+        }
+
+        .dashboard-nav-item .dni-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .dashboard-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        @media (min-width: 600px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            transition: var(--transition-base);
+            animation: cardIn 0.4s ease both;
+        }
+
+        .stat-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-card-label {
+            font-size: var(--font-size-xs);
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+        }
+
+        .stat-card-value {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .stat-card-icon {
+            margin-bottom: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--accent-glow-sm);
+            color: var(--accent-light);
+        }
+
+        .stat-card-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 48px 0 32px;
+            margin-bottom: var(--bottom-nav-height);
+        }
+
+        @media (min-width: 768px) {
+            .footer {
+                margin-bottom: 0;
+                padding: 64px 0 32px;
+            }
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+
+        @media (min-width: 600px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+            }
+        }
+
+        .footer-brand {
+            font-family: var(--font-english);
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand span {
+            color: var(--accent);
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: var(--font-size-sm);
+            max-width: 300px;
+        }
+
+        .footer-heading {
+            font-size: var(--font-size-sm);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .footer-link {
+            display: block;
+            padding: 4px 0;
+            color: var(--text-muted);
+            font-size: var(--font-size-sm);
+            transition: var(--transition-fast);
+            cursor: pointer;
+        }
+
+        .footer-link:hover {
+            color: var(--text-primary);
+            transform: translateX(4px);
+        }
+
+        .footer-social-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .footer-social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            transition: var(--transition-fast);
+            cursor: pointer;
+        }
+
+        .footer-social-link:hover {
+            color: var(--text-primary);
+            border-color: var(--border-light);
+            background: var(--bg-elevated);
+            transform: translateY(-2px);
+        }
+
+        .footer-social-link svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+            text-align: center;
+            font-size: var(--font-size-xs);
+            color: var(--text-dark);
+        }
+
+        .faq-item {
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            margin-bottom: 10px;
+            overflow: hidden;
+            background: var(--bg-card);
+            transition: var(--transition-fast);
+        }
+
+        .faq-item:hover {
+            border-color: var(--border-light);
+        }
+
+        .faq-question {
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            color: var(--text-primary);
+            user-select: none;
+            transition: var(--transition-fast);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .faq-icon {
+            transition: var(--transition-base);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .faq-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: var(--text-muted);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-item.open .faq-icon svg {
+            stroke: var(--accent-light);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+            padding: 0 20px;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+            padding: 0 20px 16px;
+        }
+
+        .faq-answer-text {
+            color: var(--text-muted);
+            font-size: var(--font-size-sm);
+            line-height: 1.8;
+        }
+
+        .review-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            transition: var(--transition-fast);
+        }
+
+        .review-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .review-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            font-size: var(--font-size-sm);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .review-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .review-name {
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            color: var(--text-primary);
+        }
+
+        .review-stars {
+            font-size: var(--font-size-xs);
+            color: var(--warning);
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            color: var(--text-muted);
+            font-size: var(--font-size-sm);
+            line-height: 1.8;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            background: var(--bg-elevated);
+            color: var(--text-muted);
+            transition: var(--transition-fast);
+            cursor: pointer;
+            border: 1px solid var(--border);
+            white-space: nowrap;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        .tag:active {
+            transform: scale(0.94);
+            transition-duration: 0.1s;
+        }
+
+        .tag.active {
+            background: var(--accent-glow-sm);
+            color: var(--accent-light);
+            border-color: var(--accent-border);
+        }
+
+        .tag:hover {
+            border-color: var(--border-light);
+            color: var(--text-primary);
+        }
+
+        .form-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-section-title {
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .rating-stars {
+            display: inline-flex;
+            gap: 4px;
+            direction: ltr;
+        }
+
+        .rating-stars button {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            padding: 0 2px;
+            cursor: pointer;
+            color: var(--text-dark);
+            transition: var(--transition-fast);
+            line-height: 1;
+        }
+
+        .rating-stars button:hover,
+        .rating-stars button.active {
+            color: var(--warning);
+        }
+
+        .rating-stars button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        .rating-label {
+            font-size: var(--font-size-xs);
+            color: var(--text-muted);
+            margin-left: 6px;
+        }
+
+        .review-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .review-section-title {
+            font-size: var(--font-size-base);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .user-review-box {
+            background: var(--bg-surface);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 767px) {
+            .hide-mobile {
+                display: none !important;
+            }
+
+            .btn-sm-mobile {
+                padding: 8px 12px;
+                font-size: var(--font-size-xs);
+            }
+
+            .modal {
+                padding: 16px;
+                max-height: 90vh;
+                border-radius: var(--radius-lg);
+            }
+
+            .section {
+                padding: 32px 0;
+            }
+
+            .hero {
+                padding: 40px 0 32px;
+            }
+
+            .course-grid {
+                gap: 12px;
+            }
+
+            .dashboard-layout {
+                gap: 16px;
+            }
+
+            .stat-card {
+                padding: 16px;
+            }
+
+            .stat-card-value {
+                font-size: var(--font-size-xl);
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .course-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+/* ===== HEADER BRAND STYLE ===== */
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+#nav-logo-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-logo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.brand-name {
+    font-family: var(--font-english);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.brand-name span {
+    color: var(--accent);
+}
+    </style>
+
+</head>
+
+<body>
+
+    <div id="loading-overlay">
+        <div class="loader-spinner"></div>
+        <span class="loader-text">IMPACT MEDIA লোড হচ্ছে...</span>
+    </div>
+
+    <div id="toast-container" aria-live="polite"></div>
+
+    <div id="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal" id="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Modal</h3>
+                <button class="modal-close" id="modal-close-btn" aria-label="বন্ধ করুন">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+<!-- Mobile Header -->
+<header id="mobile-header">
+
+    <a class="mobile-brand"
+       href="#"
+       onclick="navigateTo('home'); return false;">
+
+        <span id="mobile-logo-text">
+            <span class="brand-name">
+                IMPACT <span>MEDIA</span>
+            </span>
+        </span>
+
+    </a>
+
+</header>
+
+    <nav id="desktop-nav" role="navigation" aria-label="Desktop navigation">
+        <div class="nav-inner">
+            <a class="nav-logo" href="#" onclick="navigateTo('home'); return false;">
+                <span id="nav-logo-text">IMPACT <span>MEDIA</span></span>
+            </a>
+            <div class="nav-links">
+                <a class="nav-link" data-nav="home" href="#" onclick="navigateTo('home'); return false;">হোম</a>
+                <a class="nav-link" data-nav="courses" href="#" onclick="navigateTo('courses'); return false;">কোর্সসমূহ</a>
+                <a class="nav-link" data-nav="faq" href="#" onclick="navigateTo('home'); document.getElementById('faq-section')?.scrollIntoView({behavior:'smooth'}); return false;">FAQ</a>
+            </div>
+            <div class="nav-actions" id="nav-actions-desktop"></div>
+        </div>
+    </nav>
+
+    <nav id="mobile-bottom-nav" role="navigation" aria-label="Mobile navigation">
+        <button class="bottom-nav-item active" data-mnav="home" onclick="navigateTo('home')">
+            <span class="bn-icon"><svg viewBox="0 0 24 24">
+                    <path d="M3 12l9-9 9 9" />
+                    <path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10" />
+                </svg></span>
+            <span>হোম</span>
+        </button>
+        <button class="bottom-nav-item" data-mnav="courses" onclick="navigateTo('courses')">
+            <span class="bn-icon"><svg viewBox="0 0 24 24">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                </svg></span>
+            <span>কোর্স</span>
+        </button>
+        <button class="bottom-nav-item" data-mnav="wallet" onclick="navigateTo('wallet')">
+            <span class="bn-icon"><svg viewBox="0 0 24 24">
+                    <rect x="2" y="6" width="20" height="12" rx="2" />
+                    <path d="M16 12h2" />
+                    <path d="M6 10h4" />
+                </svg></span>
+            <span>ওয়ালেট</span>
+        </button>
+        <button class="bottom-nav-item" data-mnav="dashboard" onclick="navigateTo('dashboard')">
+            <span class="bn-icon"><svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="9" rx="1" />
+                    <rect x="14" y="3" width="7" height="5" rx="1" />
+                    <rect x="14" y="12" width="7" height="9" rx="1" />
+                    <rect x="3" y="16" width="7" height="5" rx="1" />
+                </svg></span>
+            <span>ড্যাশবোর্ড</span>
+        </button>
+        <button class="bottom-nav-item" data-mnav="profile" onclick="navigateTo('profile')">
+            <span class="bn-icon"><svg viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg></span>
+            <span>প্রোফাইল</span>
+        </button>
+    </nav>
+
+    <main id="main-content">
+        <div id="app-views">
+
+            <div id="view-home" class="view active">
+                <section class="hero">
+                    <div class="container">
+                        <div class="hero-content">
+                            <div class="hero-badge">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                                </svg>
+                                Premium Digital Education
+                            </div>
+                            <h1 class="hero-title">আপনার <span>Digital Media</span><br>ক্যারিয়ার শুরু করুন</h1>
+                            <p class="hero-subtitle">YouTube Automation , Graphics Design , AI Apps & Web Development এবং সোশ্যাল মিডিয়ায় নিজের একটি অন্যতম পরিচয় তৈরি করুন।।</p>
+                            <div class="hero-actions">
+                                <button class="btn btn-primary btn-lg" onclick="navigateTo('courses')">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                                    </svg>
+                                    কোর্স দেখুন
+                                </button>
+                                <button class="btn btn-secondary btn-lg" onclick="navigateTo('register')">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                        <circle cx="12" cy="7" r="4" />
+                                    </svg>
+                                    শুরু করুন — বিনামূল্যে
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section" id="featured-courses-section">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title">Featured কোর্সসমূহ</h2>
+                            <p class="section-subtitle">আমাদের সবচেয়ে জনপ্রিয় কোর্সগুলো দেখুন</p>
+                        </div>
+                        <div id="featured-courses-container" class="course-grid"></div>
+                        <div style="text-align:center;margin-top:24px;">
+                            <button class="btn btn-outline" onclick="navigateTo('courses')">সব কোর্স দেখুন →</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title">কেন IMPACT MEDIA?</h2>
+                        </div>
+                        <div class="dashboard-grid">
+                            <div class="card">
+                                <h4>Lifetime Access</h4>
+                                <p>একবার কিনুন, সারাজীবন অ্যাক্সেস। কোনো সময়সীমা নেই।</p>
+                            </div>
+                            <div class="card">
+                                <h4>Practical Learning</h4>
+                                <p>শুধু তত্ত্ব নয়—বাস্তবে কাজে লাগানো যায় এমন জ্ঞান ও গাইডলাইন।</p>
+                            </div>
+                            <div class="card">
+                                <h4>Learn Anywhere</h4>
+                                <p>যেকোনো ডিভাইস থেকে নিজের সুবিধামতো শেখার সুযোগ।</p>
+                            </div>
+                            <div class="card">
+                                <h4>Dedicated Support</h4>
+                                <p>প্রয়োজনে সহায়তা ও সঠিক দিকনির্দেশনা পাওয়ার সুযোগ।</p>
+                            </div>
+                            <div class="card">
+                                <h4>Expert-Led Training</h4>
+                                <p>অভিজ্ঞদের গাইডলাইনে শেখার সুযোগ।</p>
+                            </div>
+                            <div class="card">
+                                <h4>All-In-One Learning</h4>
+                                <p>প্রয়োজনীয় সবকিছু এক প্ল্যাটফর্মে।</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section" id="faq-section">
+                    <div class="container" style="max-width:800px;">
+                        <div class="section-header">
+                            <h2 class="section-title">সচরাচর জিজ্ঞাসা (FAQ)</h2>
+                        </div>
+                        <div id="faq-container"></div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="view-courses" class="view">
+                <div class="container" style="padding-top:24px;padding-bottom:40px;">
+                    <div class="section-header">
+                        <h2 class="section-title">সব কোর্সসমূহ</h2>
+                        <p class="section-subtitle">আপনার পছন্দের কোর্স বেছে নিন</p>
+                    </div>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px;" id="category-tags">
+                        <button class="tag active" data-cat="all" onclick="filterCourses('all')">সব</button>
+                    </div>
+                    <div id="all-courses-container" class="course-grid"></div>
+                </div>
+            </div>
+
+            <div id="view-course-detail" class="view">
+                <div class="container" style="padding-top:24px;padding-bottom:40px;max-width:900px;">
+                    <div id="course-detail-content"></div>
+                </div>
+            </div>
+
+            <div id="view-login" class="view">
+                <div class="container" style="max-width:420px;padding-top:48px;padding-bottom:48px;">
+                    <div class="card" style="padding:32px;">
+                        <h2 style="text-align:center;font-size:1.5rem;font-weight:700;margin-bottom:8px;color:var(--text-primary);">লগইন</h2>
+                        <p style="text-align:center;color:var(--text-muted);font-size:0.875rem;margin-bottom:24px;">আপনার অ্যাকাউন্টে প্রবেশ করুন</p>
+                        <div id="login-error" class="input-error" style="margin-bottom:12px;text-align:center;"></div>
+                        <div class="input-group">
+                            <label class="input-label" for="login-email">ইমেইল</label>
+                            <input class="input-field" id="login-email" type="email" placeholder="আপনার ইমেইল">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label" for="login-password">পাসওয়ার্ড</label>
+                            <input class="input-field" id="login-password" type="password" placeholder="পাসওয়ার্ড">
+                        </div>
+                        <button class="btn btn-primary btn-block" id="login-btn" onclick="handleLogin()">লগইন করুন</button>
+                        <div style="text-align:center;margin-top:16px;font-size:0.875rem;color:var(--text-muted);">
+                            <button class="btn btn-ghost btn-sm" onclick="showPasswordReset()">পাসওয়ার্ড ভুলে গেছেন?</button>
+                        </div>
+                        <div style="text-align:center;margin-top:8px;font-size:0.875rem;color:var(--text-muted);">
+                            অ্যাকাউন্ট নেই? <a href="#" onclick="navigateTo('register');return false;" style="color:var(--accent-light);font-weight:600;">রেজিস্টার করুন</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-register" class="view">
+                <div class="container" style="max-width:420px;padding-top:48px;padding-bottom:48px;">
+                    <div class="card" style="padding:32px;">
+                        <h2 style="text-align:center;font-size:1.5rem;font-weight:700;margin-bottom:8px;color:var(--text-primary);">রেজিস্টার</h2>
+                        <p style="text-align:center;color:var(--text-muted);font-size:0.875rem;margin-bottom:24px;">নতুন অ্যাকাউন্ট তৈরি করুন</p>
+                        <div id="register-error" class="input-error" style="margin-bottom:12px;text-align:center;"></div>
+                        <div class="input-group">
+                            <label class="input-label" for="register-name">নাম</label>
+                            <input class="input-field" id="register-name" type="text" placeholder="আপনার নাম">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label" for="register-email">ইমেইল</label>
+                            <input class="input-field" id="register-email" type="email" placeholder="আপনার ইমেইল">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label" for="register-password">পাসওয়ার্ড</label>
+                            <input class="input-field" id="register-password" type="password" placeholder="পাসওয়ার্ড (সর্বনিম্ন ৬ অক্ষর)">
+                        </div>
+                        <button class="btn btn-primary btn-block" id="register-btn" onclick="handleRegister()">রেজিস্টার করুন</button>
+                        <div style="text-align:center;margin-top:16px;font-size:0.875rem;color:var(--text-muted);">
+                            আগে থেকেই অ্যাকাউন্ট আছে? <a href="#" onclick="navigateTo('login');return false;" style="color:var(--accent-light);font-weight:600;">লগইন করুন</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-dashboard" class="view">
+                <div class="container">
+                    <div class="dashboard-layout">
+                        <div class="dashboard-sidebar" id="dashboard-sidebar"></div>
+                        <div class="dashboard-content" id="dashboard-content"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-wallet" class="view">
+                <div class="container" style="padding-top:24px;padding-bottom:40px;max-width:800px;">
+                    <div class="dashboard-layout">
+                        <div class="dashboard-sidebar" id="wallet-sidebar"></div>
+                        <div class="dashboard-content" id="wallet-content"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-profile" class="view">
+                <div class="container" style="padding-top:24px;padding-bottom:40px;max-width:700px;">
+                    <div class="dashboard-layout">
+                        <div class="dashboard-sidebar" id="profile-sidebar"></div>
+                        <div class="dashboard-content" id="profile-content"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer" id="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">IMPACT <span>MEDIA</span></div>
+                    <p class="footer-text">YouTube Automation , Graphics Design , AI Apps & Web Development এবং সোশ্যাল মিডিয়ায় নিজের একটি অন্যতম পরিচয় তৈরি করুন।</p>
+                </div>
+                <div>
+                    <h4 class="footer-heading">দ্রুত লিংক</h4>
+                    <a class="footer-link" href="#" onclick="navigateTo('home');return false;">হোম</a>
+                    <a class="footer-link" href="#" onclick="navigateTo('courses');return false;">কোর্সসমূহ</a>
+                    <a class="footer-link" href="#" onclick="navigateTo('dashboard');return false;">ড্যাশবোর্ড</a>
+                </div>
+                <div>
+                    <h4 class="footer-heading">সোশ্যাল মিডিয়া</h4>
+                    <div class="footer-social-row">
+                        <button class="footer-social-link" onclick="openSocialLink('youtube')" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
+                                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" />
+                            </svg>
+                            YouTube
+                        </button>
+                        <button class="footer-social-link" onclick="openSocialLink('tiktok')" aria-label="TikTok">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 12a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 0V2.05a10 10 0 0 1 8 0v4a6 6 0 0 0-4 0v6.95" />
+                            </svg>
+                            TikTok
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-heading">সাপোর্ট</h4>
+                    <a class="footer-link" href="#" onclick="navigateTo('dashboard');renderSupportSection();return false;">সাপোর্ট</a>
+                    <a class="footer-link" href="#" onclick="navigateTo('home');document.getElementById('faq-section')?.scrollIntoView({behavior:'smooth'});return false;">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">© 2026 IMPACT MEDIA। সর্বস্বত্ব সংরক্ষিত।</div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import {
+            initializeApp
+        } from "firebase/app";
+        import {
+            getAuth,
+            onAuthStateChanged,
+            signInWithEmailAndPassword,
+            createUserWithEmailAndPassword,
+            signOut,
+            GoogleAuthProvider,
+            signInWithPopup,
+            updateProfile,
+            updatePassword,
+            sendPasswordResetEmail
+        } from "firebase/auth";
+        import {
+            getDatabase,
+            ref,
+            set,
+            get,
+            push,
+            update,
+            remove,
+            onValue
+        } from "firebase/database";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC8YshcTNekinIPH8SKVCc1KbufUB5tXe8",
+            authDomain: "impact-media-ad957.firebaseapp.com",
+            databaseURL: "https://impact-media-ad957-default-rtdb.firebaseio.com",
+            projectId: "impact-media-ad957",
+            storageBucket: "impact-media-ad957.firebasestorage.app",
+            messagingSenderId: "324296730927",
+            appId: "1:324296730927:web:904cfecc0410807d9d19da"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+        const googleProvider = new GoogleAuthProvider();
+
+        let currentUser = null;
+        let currentUserData = null;
+        let currentView = 'home';
+        let allCourses = [];
+        let allReviews = [];
+        let allFaqs = [];
+        let allCategories = ['YouTube Automation',];
+        let selectedCategory = 'all';
+        let walletBalance = 0;
+        let userPurchases = [];
+        let adminSettings = {
+            bkashNumber: '',
+            nagadNumber: '',
+            supportEmail: '',
+            youtubeLink: '',
+            tiktokLink: '',
+            logoUrl: ''
+        };
+        let allServices = [];
+        let authStateReady = false;
+
+        // ---------- Toast / Modal ----------
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            const icons = {
+                success: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+                error: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>',
+                info: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+                warning: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>'
+            };
+            toast.innerHTML = `<span class="toast-icon">${icons[type] || icons.info}</span><span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 4000);
+        }
+
+        function showModal(title, bodyHTML) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-body').innerHTML = bodyHTML;
+            document.getElementById('modal-overlay').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-overlay').classList.remove('active');
+        }
+        document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+        document.getElementById('modal-overlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('modal-overlay')) closeModal();
+        });
+
+        // ---------- Navigation ----------
+        function navigateTo(view) {
+    document.getElementById('modal-overlay')?.classList.remove('active');
+    if (view === 'login' || view === 'register') {
+                if (currentUser) {
+                    showToast('আপনি ইতিমধ্যে লগইন অবস্থায় আছেন।', 'info');
+                    navigateTo('dashboard');
+                    return;
+                }
+            }
+            if ((view === 'dashboard' || view === 'wallet' || view === 'profile') && !currentUser) {
+                showToast('অনুগ্রহ করে আগে লগইন করুন।', 'warning');
+                navigateTo('login');
+                return;
+            }
+            currentView = view;
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            const targetView = document.getElementById(`view-${view}`);
+            if (targetView) targetView.classList.add('active');
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.querySelectorAll(`.nav-link[data-nav="${view}"]`).forEach(l => l.classList.add('active'));
+            document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.remove('active'));
+            const bnMap = {
+                home: 'home',
+                courses: 'courses',
+                wallet: 'wallet',
+                dashboard: 'dashboard',
+                profile: 'profile'
+            };
+            const bnTarget = bnMap[view];
+            if (bnTarget) {
+                document.querySelectorAll(`.bottom-nav-item[data-mnav="${bnTarget}"]`).forEach(b => b.classList.add(
+                    'active'));
+            }
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            if (view === 'courses') renderCoursesPage();
+            if (view === 'dashboard') renderDashboard();
+            if (view === 'wallet') renderWalletPage();
+            if (view === 'profile') renderProfilePage();
+            if (view === 'home') {
+                renderFeaturedCourses();
+                renderReviews();
+                renderFaqs();
+                renderServices();
+            }
+            if (view === 'course-detail') renderCourseDetailIfNeeded();
+        }
+        window.navigateTo = navigateTo;
+
+        // ---------- Nav actions ----------
+       function renderNavLogo() {
+
+    const logoUrl = adminSettings.logoUrl?.trim() || '';
+
+    // ===== PC HEADER =====
+    const desktopLogo = document.getElementById('nav-logo-text');
+
+    if (desktopLogo) {
+
+        desktopLogo.innerHTML = `
+            ${logoUrl ? `
+                <img
+                    src="${logoUrl}"
+                    alt="IMPACT MEDIA Logo"
+                    class="brand-logo"
+                >
+            ` : ''}
+
+            <span class="brand-name">
+                IMPACT <span>MEDIA</span>
+            </span>
+        `;
+    }
+
+
+    // ===== MOBILE HEADER =====
+    const mobileLogo = document.getElementById('mobile-logo-text');
+
+    if (mobileLogo) {
+
+        mobileLogo.innerHTML = `
+            ${logoUrl ? `
+                <img
+                    src="${logoUrl}"
+                    alt="IMPACT MEDIA Logo"
+                    class="brand-logo"
+                >
+            ` : ''}
+
+            <span class="brand-name">
+                IMPACT <span>MEDIA</span>
+            </span>
+        `;
+    }
+}
+
+        function renderNavActions() {
+            const container = document.getElementById('nav-actions-desktop');
+            if (!container) return;
+            if (currentUser) {
+                const name = currentUserData?.name || currentUser.displayName || 'User';
+                const firstLetter = name.charAt(0).toUpperCase();
+                const photoURL = currentUserData?.photoURL || currentUser.photoURL;
+                container.innerHTML = `
+              <button class="nav-user-btn" onclick="navigateTo('dashboard')">
+                <span class="nav-avatar">${photoURL ? `<img src="${photoURL}" alt="${name}">` : firstLetter}</span>
+                <span class="nav-username">${name.length > 15 ? name.substring(0, 15) + '...' : name}</span>
+              </button>
+              <button class="btn btn-sm btn-ghost" onclick="handleLogout()" title="লগআউট"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button>
+            `;
+            } else {
+                container.innerHTML = `
+              <button class="btn btn-sm btn-ghost" onclick="navigateTo('login')">লগইন</button>
+              <button class="btn btn-sm btn-primary" onclick="navigateTo('register')">রেজিস্টার</button>
+            `;
+            }
+        }
+        window.renderNavActions = renderNavActions;
+
+        // ---------- Open social link ----------
+        function openSocialLink(type) {
+            const link = type === 'youtube' ? adminSettings.youtubeLink : adminSettings.tiktokLink;
+            if (link && link !== '' && link !== '#') {
+                window.open(link, '_blank');
+            } else {
+                showToast('Link not set yet. Please contact admin.', 'warning');
+            }
+        }
+        window.openSocialLink = openSocialLink;
+
+        // ---------- Seed default data ----------
+        function seedDefaultData() {
+            const faqRef = ref(db, 'faq');
+            get(faqRef).then(snapshot => {
+                if (!snapshot.exists()) {
+                    const defaultFaqs = [{
+                            question: 'কোর্স কেনার পর কতদিন অ্যাক্সেস পাবো?',
+                            answer: 'সব কোর্স Lifetime Access। একবার কিনলে সারাজীবন অ্যাক্সেস পাবেন।',
+                            category: 'courses',
+                            order: 1
+                        },
+                        {
+                            question: 'পেমেন্ট কীভাবে করবো?',
+                            answer: 'bKash বা Nagad-এর মাধ্যমে ম্যানুয়াল ডিপোজিট করতে পারবেন। অ্যাডমিন অ্যাপ্রুভালের পর আপনার ওয়ালেটে টাকা যোগ হবে।',
+                            category: 'payment',
+                            order: 2
+                        },
+                        {
+                            question: 'ওয়ালেট ব্যালেন্স কীভাবে কাজ করে?',
+                            answer: 'আপনি bKash/Nagad থেকে ডিপোজিট করলে অ্যাডমিন অ্যাপ্রুভালের পর ব্যালেন্স যোগ হয়। তারপর সেই ব্যালেন্স দিয়ে কোর্স কিনতে পারবেন।',
+                            category: 'wallet',
+                            order: 3
+                        },
+                        {
+                            question: 'কোর্স কেনার পর কীভাবে অ্যাক্সেস পাবো?',
+                            answer: 'কোর্স কেনার পর "My Courses" সেকশনে কোর্সটি দেখা যাবে এবং WhatsApp Community-র অ্যাক্সেস লিংক পাবেন।',
+                            category: 'lifetime-access',
+                            order: 4
+                        },
+                        {
+                            question: 'কমিউনিটিতে কীভাবে যোগ দেবো?',
+                            answer: 'কোর্স কেনার পর WhatsApp Group/Community-র লিংক পাবেন। সেই লিংক থেকে সরাসরি যোগ দিতে পারবেন।',
+                            category: 'community',
+                            order: 5
+                        },
+                    ];
+                    defaultFaqs.forEach(faq => {
+                        const newRef = push(ref(db, 'faq'));
+                        set(newRef, {
+                            ...faq,
+                            createdAt: Date.now()
+                        });
+                    });
+                }
+            }).catch(() => {});
+            const settingsRef = ref(db, 'settings');
+            get(settingsRef).then(snapshot => {
+                if (!snapshot.exists()) {
+                    set(settingsRef, {
+                        bkashNumber: '01XXXXXXXXX',
+                        nagadNumber: '01XXXXXXXXX',
+                        supportEmail: 'support@impactmedia.com',
+                        youtubeLink: '#',
+                        tiktokLink: '#',
+                        logoUrl: '',
+                        updatedAt: Date.now()
+                    });
+                }
+            }).catch(() => {});
+            const servicesRef = ref(db, 'services');
+            get(servicesRef).then(snapshot => {
+                if (!snapshot.exists()) {
+                    const defaultServices = [{
+                            title: 'ভিডিও ক্রিয়েশন',
+                            description: 'AI-চালিত ভিডিও তৈরি, স্ক্রিপ্ট থেকে ফাইনাল এডিট পর্যন্ত।',
+                            icon: 'video',
+                            active: true,
+                            order: 1
+                        },
+                        {
+                            title: 'SEO ও গ্রোথ',
+                            description: 'YouTube SEO, কনটেন্ট স্ট্র্যাটেজি এবং চ্যানেল গ্রোথ।',
+                            icon: 'chart',
+                            active: true,
+                            order: 2
+                        },
+                        {
+                            title: 'থাম্বনেইল ডিজাইন',
+                            description: 'ক্লিক-ওয়ার্থি থাম্বনেইল যা ভিউ বাড়ায়।',
+                            icon: 'image',
+                            active: true,
+                            order: 3
+                        },
+                    ];
+                    defaultServices.forEach(service => {
+                        const newRef = push(ref(db, 'services'));
+                        set(newRef, {
+                            ...service,
+                            createdAt: Date.now()
+                        });
+                    });
+                }
+            }).catch(() => {});
+        }
+
+        // ---------- Load settings ----------
+        function loadSettings() {
+            const settingsRef = ref(db, 'settings');
+            onValue(settingsRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    adminSettings.bkashNumber = data.bkashNumber || '';
+                    adminSettings.nagadNumber = data.nagadNumber || '';
+                    adminSettings.supportEmail = data.supportEmail || 'support@impactmedia.com';
+                    adminSettings.youtubeLink = data.youtubeLink || '#';
+                    adminSettings.tiktokLink = data.tiktokLink || '#';
+                    adminSettings.logoUrl = data.logoUrl || '';
+                }
+                renderNavLogo();
+            });
+        }
+
+        // ---------- Load services ----------
+        function loadServices() {
+            const servicesRef = ref(db, 'services');
+            onValue(servicesRef, (snapshot) => {
+                allServices = [];
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    Object.keys(data).forEach(key => {
+                        const service = data[key];
+                        if (service.active !== false) {
+                            allServices.push({
+                                id: key,
+                                ...service
+                            });
+                        }
+                    });
+                    allServices.sort((a, b) => (a.order || 0) - (b.order || 0));
+                }
+                renderServices();
+            });
+        }
+
+        // ---------- Render services ----------
+        function renderServices() {
+            const container = document.getElementById('services-container');
+            if (!container) return;
+            if (allServices.length === 0) {
+                container.innerHTML = `
+              <div class="empty-state" style="grid-column:1/-1;">
+                <div class="empty-state-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+                <div class="empty-state-title">কোনো সার্ভিস পাওয়া যায়নি</div>
+                <div class="empty-state-text">শীঘ্রই নতুন সার্ভিস যোগ হবে।</div>
+              </div>
+            `;
+                return;
+            }
+            const iconMap = {
+                video: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+                chart: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
+                image: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>',
+            };
+            container.innerHTML = allServices.map(s => `
+            <div class="card card-hover">
+              <div style="display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:var(--radius-md);background:var(--accent-glow-sm);color:var(--accent-light);margin-bottom:12px;">
+                ${iconMap[s.icon] || iconMap.video}
+              </div>
+              <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:8px;color:var(--text-primary);">${s.title}</h3>
+              <p style="color:var(--text-muted);font-size:0.875rem;">${s.description}</p>
+            </div>
+          `).join('');
+        }
+
+        // ---------- Load courses ----------
+        function loadCourses() {
+            const coursesRef = ref(db, 'courses');
+            onValue(coursesRef, (snapshot) => {
+                allCourses = [];
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    Object.keys(data).forEach(key => {
+                        const course = data[key];
+                        if (course.active !== false) {
+                            allCourses.push({
+                                id: key,
+                                ...course
+                            });
+                        }
+                    });
+                }
+                renderFeaturedCourses();
+                renderAllCourses();
+                renderCourseDetailIfNeeded();
+                if (currentView === 'dashboard') {
+                    const activeDash = document.querySelector('.dashboard-nav-item.active');
+                    if (activeDash) {
+                        const id = activeDash.dataset.dash;
+                        if (id === 'dash-courses-all') renderAllCoursesInDashboard();
+                        else if (id === 'dash-courses') renderMyCourses();
+                    }
+                }
+            });
+        }
+
+        // ---------- Load reviews ----------
+        function loadReviews() {
+            const reviewsRef = ref(db, 'reviews');
+            onValue(reviewsRef, (snapshot) => {
+                allReviews = [];
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    Object.keys(data).forEach(key => {
+                        const review = data[key];
+                        if (review.approved === true) {
+                            allReviews.push({
+                                id: key,
+                                ...review
+                            });
+                        }
+                    });
+                }
+                renderReviews();
+            });
+        }
+
+        // ---------- Load FAQs ----------
+        function loadFaqs() {
+            const faqRef = ref(db, 'faq');
+            onValue(faqRef, (snapshot) => {
+                allFaqs = [];
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    Object.keys(data).forEach(key => {
+                        allFaqs.push({
+                            id: key,
+                            ...data[key]
+                        });
+                    });
+                }
+                allFaqs.sort((a, b) => (a.order || 0) - (b.order || 0));
+                renderFaqs();
+            });
+        }
+
+        // ---------- Render featured courses ----------
+        function renderFeaturedCourses() {
+            const container = document.getElementById('featured-courses-container');
+            if (!container) return;
+            const featured = allCourses.slice(0, 4);
+            if (featured.length === 0) {
+                container.innerHTML = `
+              <div class="empty-state" style="grid-column:1/-1;">
+                <div class="empty-state-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+                <div class="empty-state-title">কোনো Course পাওয়া যায়নি</div>
+                <div class="empty-state-text">শীঘ্রই নতুন কোর্স যোগ হবে।</div>
+              </div>
+            `;
+                return;
+            }
+            container.innerHTML = featured.map(course => courseCardHTML(course)).join('');
+            attachCourseCardListeners();
+        }
+
+        // ---------- Course card HTML ----------
+        function courseCardHTML(course) {
+            const price = course.discountPrice && course.discountPrice > 0 ? course.discountPrice : course.price;
+            const hasDiscount = course.discountPrice && course.discountPrice > 0 && course.discountPrice < course.price;
+            const thumbHTML = course.thumbnail ?
+                `<img src="${course.thumbnail}" alt="${course.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'course-card-thumb-placeholder\'><svg viewBox=\'0 0 24 24\'><path d=\'M4 19.5A2.5 2.5 0 0 1 6.5 17H20\'/><path d=\'M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z\'/></svg></div>'">` :
+                `<div class="course-card-thumb-placeholder"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>`;
+            return `
+            <div class="course-card" data-course-id="${course.id}" onclick="openCourseDetail('${course.id}')">
+              <div class="course-card-thumb">${thumbHTML}
+                <span class="badge badge-accent course-card-badge">${course.category || 'General'}</span>
+              </div>
+              <div class="course-card-body">
+                <h3 class="course-card-title">${course.name}</h3>
+                <p class="course-card-desc">${course.description || ''}</p>
+                <div class="course-card-footer">
+                  <div>
+                    <span class="course-price ${hasDiscount ? 'course-price-discounted' : ''}">৳${price}</span>
+                    ${hasDiscount ? `<span class="course-price-original">৳${course.price}</span>` : ''}
+                  </div>
+                  <span class="badge badge-success">Lifetime</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        function attachCourseCardListeners() {
+            document.querySelectorAll('.course-card').forEach(card => {
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const id = card.dataset.courseId;
+                        openCourseDetail(id);
+                    }
+                });
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+            });
+        }
+
+        // ---------- Render all courses ----------
+        function renderAllCourses() {
+            const container = document.getElementById('all-courses-container');
+            const tagsContainer = document.getElementById('category-tags');
+            if (!container || !tagsContainer) return;
+            const categories = [...new Set(allCourses.map(c => c.category).filter(Boolean))];
+            allCategories = [...new Set([...allCategories, ...categories])];
+            tagsContainer.innerHTML =
+                `<button class="tag ${selectedCategory === 'all' ? 'active' : ''}" data-cat="all" onclick="filterCourses('all')">সব</button>` +
+                allCategories.filter(c => c).map(cat =>
+                    `<button class="tag ${selectedCategory === cat ? 'active' : ''}" data-cat="${cat}" onclick="filterCourses('${cat}')">${cat}</button>`
+                ).join('');
+            let filtered = allCourses;
+            if (selectedCategory !== 'all') {
+                filtered = allCourses.filter(c => c.category === selectedCategory);
+            }
+            if (filtered.length === 0) {
+                container.innerHTML = `
+              <div class="empty-state" style="grid-column:1/-1;">
+                <div class="empty-state-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+                <div class="empty-state-title">কোনো Course পাওয়া যায়নি</div>
+                <div class="empty-state-text">এই ক্যাটাগরিতে এখনো কোনো কোর্স নেই।</div>
+              </div>
+            `;
+                return;
+            }
+            container.innerHTML = filtered.map(course => courseCardHTML(course)).join('');
+            attachCourseCardListeners();
+        }
+
+        function filterCourses(category) {
+            selectedCategory = category;
+            renderAllCourses();
+        }
+        window.filterCourses = filterCourses;
+
+        // ---------- Course detail ----------
+        function openCourseDetail(courseId) {
+            const course = allCourses.find(c => c.id === courseId);
+            if (!course) {
+                showToast('কোর্স পাওয়া যায়নি', 'error');
+                return;
+            }
+            currentView = 'course-detail';
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('view-course-detail').classList.add('active');
+            renderCourseDetail(course);
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        window.openCourseDetail = openCourseDetail;
+
+        function renderCourseDetail(course) {
+            const container = document.getElementById('course-detail-content');
+            if (!container) return;
+            const price = course.discountPrice && course.discountPrice > 0 ? course.discountPrice : course.price;
+            const hasDiscount = course.discountPrice && course.discountPrice > 0 && course.discountPrice < course.price;
+            const isPurchased = userPurchases.some(p => p.courseId === course.id);
+            const thumbHTML = course.thumbnail ?
+                `<img src="${course.thumbnail}" alt="${course.name}" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg);">` :
+                `<div style="width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);border-radius:var(--radius-lg);color:var(--text-muted);"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>`;
+            const hasUserReview = currentUser ? userHasReviewed(course.id) : false;
+            const userReviewData = currentUser ? getUserReview(course.id) : null;
+
+            container.innerHTML = `
+            <div class="card" style="overflow:hidden;padding:0;margin-bottom:24px;">
+              <div style="aspect-ratio:16/9;overflow:hidden;border-radius:var(--radius-lg) var(--radius-lg) 0 0;">${thumbHTML}</div>
+              <div style="padding:24px;">
+                <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px;">
+                  <span class="badge badge-accent">${course.category || 'General'}</span>
+                  <span class="badge badge-success">Lifetime Access</span>
+                </div>
+                <h2 style="font-size:1.5rem;font-weight:700;color:var(--text-primary);margin-bottom:12px;">${course.name}</h2>
+                <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:16px;">${course.description || ''}</p>
+                ${course.details ? `<div style="color:var(--text-secondary);font-size:0.9rem;line-height:1.8;margin-bottom:16px;white-space:pre-line;">${course.details}</div>` : ''}
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:16px;background:var(--bg-surface);border-radius:var(--radius-md);margin-bottom:16px;">
+                  <span class="course-price ${hasDiscount ? 'course-price-discounted' : ''}" style="font-size:1.75rem;font-weight:800;">৳${price}</span>
+                  ${hasDiscount ? `<span class="course-price-original" style="font-size:1rem;">৳${course.price}</span>` : ''}
+                  ${hasDiscount ? `<span class="badge badge-warning">${Math.round((1 - course.discountPrice / course.price) * 100)}% OFF</span>` : ''}
+                </div>
+                ${isPurchased ? `
+                  <div style="display:flex;flex-direction:column;gap:12px;">
+                    <span class="badge badge-success" style="padding:8px 16px;font-size:0.9rem;">✅ আপনি এই কোর্সটি কিনেছেন</span>
+                    ${course.whatsappLink && course.whatsappLink.trim() !== '' ? `
+                      <a href="${course.whatsappLink}" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-block">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        Access Course
+                      </a>
+                    ` : '<p style="color:var(--text-muted);font-size:0.875rem;">এই কোর্সের Access Link এখনো সেট করা হয়নি। অনুগ্রহ করে অ্যাডমিনের সাথে যোগাযোগ করুন।</p>'}
+                    ${renderReviewSection(course.id, hasUserReview, userReviewData)}
+                  </div>
+                ` : `
+                  <button class="btn btn-primary btn-lg btn-block" id="buy-course-btn" onclick="buyCourse('${course.id}')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Buy Now — ৳${price}
+                  </button>
+                `}
+              </div>
+            </div>
+            <button class="btn btn-ghost" onclick="navigateTo('courses')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              সব কোর্সে ফিরে যান
+            </button>
+          `;
+        }
+
+        // ---------- Review rendering inside course detail ----------
+        function renderReviewSection(courseId, hasReview, reviewData) {
+            if (!currentUser) return '';
+            const stars = hasReview && reviewData ? reviewData.rating || 0 : 0;
+            const comment = hasReview && reviewData ? reviewData.review || '' : '';
+            const reviewId = hasReview && reviewData ? reviewData.id : null;
+            return `
+            <div class="review-section">
+
+
+               
+                <div class="input-group" style="margin-bottom:10px;">
+
+
+                </button>
+                ${hasReview ? `<button class="btn btn-ghost btn-sm" style="margin-left:8px;" onclick="deleteReview('${courseId}')">রিভিউ মুছুন</button>` : ''}
+              </div>
+            </div>
+          `;
+        }
+
+        // ---------- Rating state ----------
+        let ratingState = {};
+
+        function setRating(courseId, star) {
+            ratingState[courseId] = star;
+            const container = document.getElementById(`review-stars-${courseId}`);
+            if (!container) return;
+            container.querySelectorAll('button').forEach(btn => {
+                const s = parseInt(btn.dataset.star);
+                btn.classList.toggle('active', s <= star);
+            });
+            const label = document.getElementById(`rating-label-${courseId}`);
+            if (label) label.textContent = star + ' star';
+        }
+        window.setRating = setRating;
+
+        // ---------- Submit review ----------
+        async function submitReview(courseId) {
+            if (!currentUser) {
+                showToast('রিভিউ দিতে আগে লগইন করুন', 'warning');
+                navigateTo('login');
+                return;
+            }
+            const isPurchased = userPurchases.some(p => p.courseId === courseId);
+            if (!isPurchased) {
+                showToast('আপনি এই কোর্সটি কেনেননি, রিভিউ দিতে পারবেন না।', 'error');
+                return;
+            }
+            const star = ratingState[courseId] || 0;
+            if (star === 0) {
+                showToast('অনুগ্রহ করে রেটিং দিন', 'warning');
+                return;
+            }
+            const comment = document.getElementById(`review-comment-${courseId}`)?.value?.trim() || '';
+            const existing = getUserReview(courseId);
+            try {
+                if (existing) {
+                    await update(ref(db, `reviews/${existing.id}`), {
+                        rating: star,
+                        review: comment,
+                        updatedAt: Date.now()
+                    });
+                    showToast('রিভিউ আপডেট হয়েছে!', 'success');
+                } else {
+                    const newRef = push(ref(db, 'reviews'));
+                    await set(newRef, {
+                        uid: currentUser.uid,
+                        courseId: courseId,
+                        name: currentUserData?.name || currentUser.displayName || 'User',
+                        photoURL: currentUserData?.photoURL || currentUser.photoURL || '',
+                        rating: star,
+                        review: comment,
+                        approved: true,
+                        createdAt: Date.now(),
+                        updatedAt: Date.now()
+                    });
+                    showToast('রিভিউ জমা হয়েছে! ধন্যবাদ।', 'success');
+                }
+                const course = allCourses.find(c => c.id === courseId);
+                if (course) renderCourseDetail(course);
+                renderReviews();
+            } catch (err) {
+                showToast('Something went wrong: ' + err.message, 'error');
+            }
+        }
+        window.submitReview = submitReview;
+
+        // ---------- Delete review ----------
+        async function deleteReview(courseId) {
+            if (!currentUser) return;
+            const existing = getUserReview(courseId);
+            if (!existing) {
+                showToast('কোনো রিভিউ পাওয়া যায়নি', 'error');
+                return;
+            }
+            try {
+                await remove(ref(db, `reviews/${existing.id}`));
+                showToast('রিভিউ মুছে ফেলা হয়েছে।', 'info');
+                const course = allCourses.find(c => c.id === courseId);
+                if (course) renderCourseDetail(course);
+                renderReviews();
+            } catch (err) {
+                showToast('Something went wrong: ' + err.message, 'error');
+            }
+        }
+        window.deleteReview = deleteReview;
+
+        // ---------- Helper: user has reviewed ----------
+        function userHasReviewed(courseId) {
+            if (!currentUser) return false;
+            return allReviews.some(r => r.uid === currentUser.uid && r.courseId === courseId);
+        }
+
+        function getUserReview(courseId) {
+            if (!currentUser) return null;
+            return allReviews.find(r => r.uid === currentUser.uid && r.courseId === courseId) || null;
+        }
+
+        // ---------- Render reviews ----------
+        function renderReviews() {
+            const container = document.getElementById('reviews-container');
+            if (!container) return;
+            if (allReviews.length === 0) {
+                container.innerHTML = `
+              <div class="empty-state" style="grid-column:1/-1;">
+                <div class="empty-state-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 1-4 5 1 6-6-3-6 3 1-6-4-5 6-1z"/></svg></div>
+                <div class="empty-state-title">এখনো কোনো রিভিউ নেই</div>
+                <div class="empty-state-text">প্রথম রিভিউটি লিখুন!</div>
+              </div>
+            `;
+                return;
+            }
+            container.innerHTML = allReviews.slice(0, 6).map(review => `
+            <div class="review-card">
+              <div class="review-header">
+                <div class="review-avatar">${review.photoURL ? `<img src="${review.photoURL}" alt="">` : (review.name || 'U').charAt(0).toUpperCase()}</div>
+                <div>
+                  <div class="review-name">${review.name || 'Anonymous'}</div>
+                  <div class="review-stars">${'★'.repeat(review.rating || 5)}${'☆'.repeat(5 - (review.rating || 5))}</div>
+                </div>
+              </div>
+              <p class="review-text">${review.review || ''}</p>
+            </div>
+          `).join('');
+        }
+
+        // ---------- Render FAQs ----------
+        function renderFaqs() {
+            const container = document.getElementById('faq-container');
+            if (!container) return;
+            if (allFaqs.length === 0) {
+                container.innerHTML = `
+              <div class="empty-state">
+                <div class="empty-state-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+                <div class="empty-state-title">কোনো FAQ নেই</div>
+              </div>
+            `;
+                return;
+            }
+            container.innerHTML = allFaqs.map(faq => `
+            <div class="faq-item" data-faq-id="${faq.id}">
+              <div class="faq-question" onclick="toggleFaq('${faq.id}')" role="button" tabindex="0" aria-expanded="false">
+                <span>${faq.question}</span>
+                <span class="faq-icon"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+              </div>
+              <div class="faq-answer">
+                <p class="faq-answer-text">${faq.answer}</p>
+              </div>
+            </div>
+          `).join('');
+        }
+        window.toggleFaq = function(faqId) {
+            const item = document.querySelector(`[data-faq-id="${faqId}"]`);
+            if (!item) return;
+            item.classList.toggle('open');
+            item.querySelector('.faq-question')?.setAttribute('aria-expanded', item.classList.contains('open'));
+        };
+
+        // ---------- Service Request Modal (with phone number) ----------
+        function openServiceRequestModal() {
+            if (!currentUser) {
+                showToast('সার্ভিস রিকোয়েস্ট করতে আগে লগইন করুন', 'warning');
+                navigateTo('login');
+                return;
+            }
+            showModal('YouTube Automation Service Request', `
+            <p style="margin-bottom:16px;color:var(--text-muted);font-size:0.875rem;">আপনার সার্ভিস রিকোয়েস্ট জমা দিন। আমরা শীঘ্রই যোগাযোগ করবো।</p>
+            <div class="input-group">
+              <label class="input-label">আপনার নাম</label>
+              <input class="input-field" id="service-name" value="${currentUserData?.name || currentUser?.displayName || ''}">
+            </div>
+            <div class="input-group">
+              <label class="input-label">ফোন নম্বর <span style="color:var(--error);">*</span></label>
+              <input class="input-field" id="service-phone" type="tel" placeholder="আপনার ফোন নম্বর লিখুন" required>
+            </div>
+            <div class="input-group">
+              <label class="input-label">কী ধরনের সার্ভিস প্রয়োজন?</label>
+              <select class="input-field" id="service-type">
+                <option value="video-creation">ভিডিও ক্রিয়েশন</option>
+                <option value="youtube-seo">YouTube SEO</option>
+                <option value="thumbnail-design">থাম্বনেইল ডিজাইন</option>
+                <option value="full-automation">সম্পূর্ণ Automation</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label class="input-label">বিস্তারিত লিখুন</label>
+              <textarea class="input-field" id="service-details" placeholder="আপনার প্রয়োজনীয়তা বিস্তারিত লিখুন..."></textarea>
+            </div>
+            <button class="btn btn-primary btn-block" onclick="submitServiceRequest()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>
+              রিকোয়েস্ট জমা দিন
+            </button>
+          `);
+        }
+        window.openServiceRequestModal = openServiceRequestModal;
+
+        function submitServiceRequest() {
+            const name = document.getElementById('service-name')?.value?.trim();
+            const phone = document.getElementById('service-phone')?.value?.trim();
+            const type = document.getElementById('service-type')?.value;
+            const details = document.getElementById('service-details')?.value?.trim();
+            if (!name || !details) {
+                showToast('নাম এবং বিস্তারিত লিখুন', 'error');
+                return;
+            }
+            if (!phone || phone.length < 5) {
+                showToast('সঠিক ফোন নম্বর লিখুন', 'error');
+                return;
+            }
+            const requestRef = push(ref(db, 'serviceRequests'));
+            set(requestRef, {
+                uid: currentUser?.uid || '',
+                name,
+                phone,
+                type,
+                details,
+                status: 'pending',
+                createdAt: Date.now()
+            }).then(() => {
+                closeModal();
+                showToast('সার্ভিস রিকোয়েস্ট সফলভাবে জমা হয়েছে!', 'success');
+            }).catch(err => {
+                showToast('Something went wrong: ' + err.message, 'error');
+            });
+        }
+        window.submitServiceRequest = submitServiceRequest;
+
+        // ---------- Auth ----------
+        async function handleRegister() {
+            const name = document.getElementById('register-name')?.value?.trim();
+            const email = document.getElementById('register-email')?.value?.trim();
+            const password = document.getElementById('register-password')?.value;
+            const errorEl = document.getElementById('register-error');
+            errorEl.textContent = '';
+            if (!name || !email || !password) {
+                errorEl.textContent = 'সব ফিল্ড পূরণ করুন';
+                return;
+            }
+            if (password.length < 6) {
+                errorEl.textContent = 'পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে';
+                return;
+            }
+            const btn = document.getElementById('register-btn');
+            btn.disabled = true;
+            btn.textContent = 'রেজিস্টার হচ্ছে...';
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                await updateProfile(userCredential.user, {
+                    displayName: name
+                });
+                await set(ref(db, `users/${userCredential.user.uid}`), {
+                    name,
+                    email,
+                    photoURL: '',
+                    role: 'student',
+                    createdAt: Date.now(),
+                    status: 'active'
+                });
+                await set(ref(db, `wallets/${userCredential.user.uid}`), {
+                    balance: 0
+                });
+                btn.disabled = false;
+                btn.textContent = 'রেজিস্টার করুন';
+                showToast('রেজিস্টার সফল! স্বাগতম!', 'success');
+                navigateTo('dashboard');
+            } catch (err) {
+                errorEl.textContent = getAuthErrorMessage(err);
+                btn.disabled = false;
+                btn.textContent = 'রেজিস্টার করুন';
+            }
+        }
+        window.handleRegister = handleRegister;
+
+        async function handleLogin() {
+            const email = document.getElementById('login-email')?.value?.trim();
+            const password = document.getElementById('login-password')?.value;
+            const errorEl = document.getElementById('login-error');
+            errorEl.textContent = '';
+            if (!email || !password) {
+                errorEl.textContent = 'সব ফিল্ড পূরণ করুন';
+                return;
+            }
+            const btn = document.getElementById('login-btn');
+            btn.disabled = true;
+            btn.textContent = 'লগইন হচ্ছে...';
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                showToast('লগইন সফল!', 'success');
+                navigateTo('dashboard');
+            } catch (err) {
+                errorEl.textContent = getAuthErrorMessage(err);
+                btn.disabled = false;
+                btn.textContent = 'লগইন করুন';
+            }
+        }
+        window.handleLogin = handleLogin;
+
+        async function handleGoogleLogin() {
+            try {
+                const result = await signInWithPopup(auth, googleProvider);
+                const user = result.user;
+                const usersRef = ref(db, `users/${user.uid}`);
+                const userSnapshot = await get(usersRef);
+                if (!userSnapshot.exists()) {
+                    await set(usersRef, {
+                        name: user.displayName || 'Google User',
+                        email: user.email,
+                        photoURL: user.photoURL || '',
+                        role: 'student',
+                        createdAt: Date.now(),
+                        status: 'active'
+                    });
+                    await set(ref(db, `wallets/${user.uid}`), {
+                        balance: 0
+                    });
+                }
+                showToast('Google দিয়ে লগইন সফল!', 'success');
+                navigateTo('dashboard');
+            } catch (err) {
+                if (err.code === 'auth/popup-closed-by-user') {
+                    showToast('Google লগইন বাতিল করা হয়েছে', 'info');
+                } else if (err.code === 'auth/operation-not-allowed') {
+                    showToast('Google Sign-In Firebase Console-এ enable করা হয়নি।', 'error');
+                } else {
+                    showToast('Google লগইন ব্যর্থ: ' + getAuthErrorMessage(err), 'error');
+                }
+            }
+        }
+        window.handleGoogleLogin = handleGoogleLogin;
+
+        async function handleLogout() {
+            try {
+                await signOut(auth);
+                showToast('লগআউট সফল!', 'success');
+                navigateTo('home');
+            } catch (err) {
+                showToast('Logout failed: ' + err.message, 'error');
+            }
+        }
+        window.handleLogout = handleLogout;
+
+        function getAuthErrorMessage(err) {
+            const messages = {
+                'auth/invalid-email': 'সঠিক ইমেইল লিখুন',
+                'auth/user-disabled': 'এই অ্যাকাউন্টটি নিষ্ক্রিয় করা হয়েছে',
+                'auth/user-not-found': 'এই ইমেইলে কোনো অ্যাকাউন্ট পাওয়া যায়নি',
+                'auth/wrong-password': 'ভুল পাসওয়ার্ড',
+                'auth/email-already-in-use': 'এই ইমেইল দিয়ে আগে থেকেই অ্যাকাউন্ট আছে',
+                'auth/weak-password': 'পাসওয়ার্ড খুব দুর্বল',
+                'auth/network-request-failed': 'নেটওয়ার্ক সমস্যা। ইন্টারনেট সংযোগ পরীক্ষা করুন।',
+                'auth/too-many-requests': 'অনেকবার চেষ্টা করা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।',
+                'auth/operation-not-allowed': 'এই লগইন পদ্ধতিটি চালু করা হয়নি',
+                'auth/popup-blocked': 'পপআপ ব্লক করা হয়েছে। ব্রাউজার সেটিংস চেক করুন।',
+            };
+            return messages[err.code] || err.message || 'Something went wrong. Please try again.';
+        }
+
+        function showPasswordReset() {
+            showModal('পাসওয়ার্ড রিসেট', `
+            <p style="margin-bottom:16px;color:var(--text-muted);font-size:0.875rem;">আপনার ইমেইল লিখুন। আমরা পাসওয়ার্ড রিসেট লিংক পাঠাবো।</p>
+            <div class="input-group">
+              <label class="input-label">ইমেইল</label>
+              <input class="input-field" id="reset-email" type="email" placeholder="আপনার ইমেইল">
+            </div>
+            <button class="btn btn-primary btn-block" onclick="sendPasswordReset()">রিসেট লিংক পাঠান</button>
+          `);
+        }
+        window.showPasswordReset = showPasswordReset;
+
+        function sendPasswordReset() {
+            const email = document.getElementById('reset-email')?.value?.trim();
+            if (!email) {
+                showToast('ইমেইল লিখুন', 'error');
+                return;
+            }
+            sendPasswordResetEmail(auth, email).then(() => {
+                closeModal();
+                showToast('পাসওয়ার্ড রিসেট লিংক পাঠানো হয়েছে। ইমেইল চেক করুন।', 'success');
+            }).catch(err => {
+                showToast(getAuthErrorMessage(err), 'error');
+            });
+        }
+        window.sendPasswordReset = sendPasswordReset;
+
+        // ---------- Buy course ----------
+        async function buyCourse(courseId) {
+            if (!currentUser) {
+                showToast('কোর্স কিনতে আগে লগইন করুন', 'warning');
+                navigateTo('login');
+                return;
+            }
+            const course = allCourses.find(c => c.id === courseId);
+            if (!course) {
+                showToast('কোর্স পাওয়া যায়নি', 'error');
+                return;
+            }
+            const alreadyPurchased = userPurchases.some(p => p.courseId === courseId);
+            if (alreadyPurchased) {
+                showToast('আপনি ইতিমধ্যে এই কোর্সটি কিনেছেন!', 'info');
+                renderCourseDetail(course);
+                return;
+            }
+            const price = course.discountPrice && course.discountPrice > 0 ? course.discountPrice : course.price;
+            const walletSnapshot = await get(ref(db, `wallets/${currentUser.uid}`));
+            const balance = walletSnapshot.exists() ? (walletSnapshot.val().balance || 0) : 0;
+                if (balance < price) {
+        showModal('অপর্যাপ্ত ব্যালেন্স', `
+      <p style="margin-bottom:16px;color:var(--text-muted);">
+        আপনার Wallet Balance <strong>৳${balance}</strong>। এই কোর্সের মূল্য <strong>৳${price}</strong>।
+        অনুগ্রহ করে আগে ওয়ালেটে টাকা যোগ করুন।
+      </p>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-primary" id="go-wallet-btn">Wallet-এ যান</button>
+        <button class="btn btn-secondary" id="cancel-lowbal-btn">বাতিল</button>
+      </div>
+    `);
+        document.getElementById('go-wallet-btn').addEventListener('click', function () {
+            document.getElementById('modal-overlay').classList.remove('active');
+            navigateTo('wallet');
+        });
+        document.getElementById('cancel-lowbal-btn').addEventListener('click', function () {
+            document.getElementById('modal-overlay').classList.remove('active');
+        });
+        return;
+    }
+    showModal('কনফার্ম করুন', `
+    <p style="margin-bottom:16px;color:var(--text-secondary);">
+      আপনি <strong>${course.name}</strong> কিনতে যাচ্ছেন।
+      Wallet থেকে <strong>৳${price}</strong> কেটে নেওয়া হবে।
+    </p>
+    <p style="margin-bottom:16px;color:var(--text-muted);font-size:0.875rem;">আপনার বর্তমান ব্যালেন্স: ৳${balance}</p>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-primary" id="confirm-buy-btn">কনফার্ম করুন</button>
+      <button class="btn btn-secondary" id="cancel-confirm-btn">বাতিল</button>
+    </div>
+  `);
+    document.getElementById('confirm-buy-btn').addEventListener('click', function () {
+        confirmPurchase(courseId);
+    });
+    document.getElementById('cancel-confirm-btn').addEventListener('click', function () {
+        document.getElementById('modal-overlay').classList.remove('active');
+    });
+}
+window.buyCourse = buyCourse;
+
+        async function confirmPurchase(courseId) {
+            const course = allCourses.find(c => c.id === courseId);
+            if (!course) {
+                closeModal();
+                showToast('কোর্স পাওয়া যায়নি', 'error');
+                return;
+            }
+            const price = course.discountPrice && course.discountPrice > 0 ? course.discountPrice : course.price;
+            closeModal();
+            try {
+                const walletRef = ref(db, `wallets/${currentUser.uid}`);
+                const walletSnapshot = await get(walletRef);
+                const currentBalance = walletSnapshot.exists() ? (walletSnapshot.val().balance || 0) : 0;
+                if (currentBalance < price) {
+                    showToast('Wallet Balance পর্যাপ্ত নয়', 'error');
+                    return;
+                }
+                const purchasesRef = ref(db, `purchases/${currentUser.uid}`);
+                const purchasesSnapshot = await get(purchasesRef);
+                if (purchasesSnapshot.exists()) {
+                    const existing = Object.values(purchasesSnapshot.val());
+                    if (existing.some(p => p.courseId === courseId)) {
+                        showToast('আপনি ইতিমধ্যে এই কোর্সটি কিনেছেন!', 'info');
+                        return;
+                    }
+                }
+                const newBalance = currentBalance - price;
+                await set(walletRef, {
+                    balance: newBalance
+                });
+                const purchaseRef = push(ref(db, `purchases/${currentUser.uid}`));
+                await set(purchaseRef, {
+                    orderId: 'ORD-' + Date.now(),
+                    uid: currentUser.uid,
+                    courseId: courseId,
+                    courseName: course.name,
+                    amount: price,
+                    date: Date.now(),
+                    status: 'completed'
+                });
+                const txnRef = push(ref(db, 'transactions'));
+                await set(txnRef, {
+                    uid: currentUser.uid,
+                    type: 'purchase',
+                    amount: price,
+                    status: 'completed',
+                    method: 'wallet',
+                    reference: courseId,
+                    createdAt: Date.now()
+                });
+                showToast('কোর্স কেনা সফল! My Courses-এ দেখুন।', 'success');
+                await loadUserPurchases();
+                renderCourseDetail(course);
+                if (currentView === 'dashboard') renderDashboard();
+            } catch (err) {
+                showToast('Purchase failed: ' + err.message, 'error');
+            }
+        }
+        window.confirmPurchase = confirmPurchase;
+
+        // ---------- Load user purchases ----------
+        async function loadUserPurchases() {
+            if (!currentUser) {
+                userPurchases = [];
+                return;
+            }
+            const purchasesRef = ref(db, `purchases/${currentUser.uid}`);
+            const snapshot = await get(purchasesRef);
+            userPurchases = [];
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                Object.keys(data).forEach(key => {
+                    userPurchases.push({
+                        id: key,
+                        ...data[key]
+                    });
+                });
+            }
+            if (currentView === 'course-detail') renderCourseDetailIfNeeded();
+        }
+
+        // ---------- Load wallet balance ----------
+        function loadWalletBalance() {
+            if (!currentUser) return;
+            const walletRef = ref(db, `wallets/${currentUser.uid}`);
+            onValue(walletRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    walletBalance = snapshot.val().balance || 0;
+                } else {
+                    walletBalance = 0;
+                }
+                if (currentView === 'wallet') renderWalletPage();
+                if (currentView === 'dashboard') renderDashboard();
+            });
+        }
+
+        // ---------- Dashboard sidebar ----------
+        function renderDashboardSidebar() {
+            const sidebar = document.getElementById('dashboard-sidebar');
+            if (!sidebar) return;
+            const items = [{
+                    id: 'dash-overview',
+                    icon: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>',
+                    label: 'Dashboard',
+                    action: 'renderDashboard'
+                },
+                {
+                    id: 'dash-courses-all',
+                    icon: '<svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+                    label: 'Courses',
+                    action: 'renderAllCoursesInDashboard'
+                },
+                {
+                    id: 'dash-courses',
+                    icon: '<svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+                    label: 'My Courses',
+                    action: 'renderMyCourses'
+                },
+                {
+                    id: 'dash-wallet',
+                    icon: '<svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M16 12h2"/><path d="M6 10h4"/></svg>',
+                    label: 'Wallet',
+                    action: 'renderWalletSection'
+                },
+                {
+                    id: 'dash-history',
+                    icon: '<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+                    label: 'Purchase History',
+                    action: 'renderPurchaseHistory'
+                },
+                {
+                    id: 'dash-profile',
+                    icon: '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+                    label: 'Profile',
+                    action: 'renderProfileSection'
+                },
+                {
+                    id: 'dash-support',
+                    icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+                    label: 'Support',
+                    action: 'renderSupportSection'
+                },
+            ];
+            sidebar.innerHTML = items.map(item =>
+                `<button class="dashboard-nav-item" data-dash="${item.id}" onclick="${item.action}()">` +
+                `<span class="dni-icon">${item.icon}</span>${item.label}</button>`
+            ).join('');
+        }
+        window.renderDashboardSidebar = renderDashboardSidebar;
+
+        function setActiveDashItem(id) {
+            document.querySelectorAll('.dashboard-nav-item').forEach(i => i.classList.remove('active'));
+            document.querySelectorAll(`[data-dash="${id}"]`).forEach(i => i.classList.add('active'));
+        }
+
+        // ---------- Dashboard ----------
+        function renderDashboard() {
+            if (!currentUser) {
+                navigateTo('login');
+                return;
+            }
+            renderDashboardSidebar();
+            setActiveDashItem('dash-overview');
+            const content = document.getElementById('dashboard-content');
+            if (!content) return;
+            const purchasedCount = userPurchases.filter(p => p.status === 'completed').length;
+            const recentPurchases = [...userPurchases].sort((a, b) => (b.date || 0) - (a.date || 0)).slice(0, 3);
+            content.innerHTML = `
+            <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:20px;color:var(--text-primary);">
+              স্বাগতম, ${currentUserData?.name || currentUser?.displayName || 'User'}
+            </h2>
+            <div class="dashboard-grid">
+              <div class="stat-card">
+                <div class="stat-card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M16 12h2"/><path d="M6 10h4"/></svg></div>
+                <div class="stat-card-label">Wallet Balance</div>
+                <div class="stat-card-value">৳${walletBalance}</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+                <div class="stat-card-label">Purchased Courses</div>
+                <div class="stat-card-value">${purchasedCount}</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+                <div class="stat-card-label">Community Access</div>
+                <div class="stat-card-value">${purchasedCount}</div>
+              </div>
+            </div>
+            <div style="margin-top:24px;">
+              <h3 style="font-size:1.1rem;font-weight:600;color:var(--text-secondary);margin-bottom:16px;">সাম্প্রতিক Purchases</h3>
+              ${recentPurchases.length === 0 ? `
+                <div class="empty-state">
+                  <div class="empty-state-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
+                  <div class="empty-state-title">এখনো কোনো Purchase নেই</div>
+                  <div class="empty-state-text"><a href="#" onclick="navigateTo('courses');return false;" style="color:var(--accent-light);">কোর্স কিনুন →</a></div>
+                </div>
+              ` : recentPurchases.map(p => `
+                <div class="card" style="margin-bottom:10px;padding:14px;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+                    <span style="font-weight:600;color:var(--text-primary);">${p.courseName || 'Course'}</span>
+                    <div style="display:flex;gap:8px;align-items:center;">
+                      <span class="badge badge-success">৳${p.amount}</span>
+                      <span style="font-size:0.75rem;color:var(--text-muted);">${new Date(p.date).toLocaleDateString('bn-BD')}</span>
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        }
+        window.renderDashboard = renderDashboard;
+
+        // ---------- All Courses in Dashboard ----------
+        function renderAllCoursesInDashboard() {
+            setActiveDashItem('dash-courses-all');
+            const content = document.getElementById('dashboard-content');
+            if (!content) return;
+            if (allCourses.length === 0) {
+                content.innerHTML = `
+              <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:16px;">সব কোর্সসমূহ</h2>
+              <div class="empty-state">
+                <div class="empty-state-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+                <div class="empty-state-title">কোনো কোর্স পাওয়া যায়নি</div>
+                <div class="empty-state-text">শীঘ্রই নতুন কোর্স যোগ হবে।</div>
+              </div>
+            `;
+                return;
+            }
+            content.innerHTML = `
+            <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:16px;">সব কোর্সসমূহ</h2>
+            <div class="course-grid">
+              ${allCourses.map(course => courseCardHTML(course)).join('')}
+            </div>
+          `;
+            attachCourseCardListeners();
+        }
+        window.renderAllCoursesInDashboard = renderAllCoursesInDashboard;
+
+        // ---------- My Courses ----------
+        function renderMyCourses() {
+            setActiveDashItem('dash-courses');
+            const content = document.getElementById('dashboard-content');
+            if (!content) return;
+            const purchased = userPurchases.filter(p => p.status === 'completed');
+            if (purchased.length === 0) {
+                content.innerHTML = `
+              <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:16px;">My Courses</h2>
+              <div class="empty-state">
+                <div class="empty-state-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+                <div class="empty-state-title">কোনো কোর্স কেনা হয়নি</div>
+                <div class="empty-state-text"><a href="#" onclick="navigateTo('courses');return false;" style="color:var(--accent-light);">কোর্স কিনুন →</a></div>
+              </div>
+            `;
+                return;
+            }
+            content.innerHTML = `
+            <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:16px;">My Courses</h2>
+            <div class="course-grid">
+              ${purchased.map(p => {
+                const course = allCourses.find(c => c.id === p.courseId);
+                if (!course) return '';
+                const hasReview = currentUser ? userHasReviewed(course.id) : false;
+                return `
+                  <div class="card card-hover" style="padding:16px;cursor:pointer;" onclick="openCourseDetail('${p.courseId}')">
+                    ${course.thumbnail ? `<img src="${course.thumbnail}" alt="${course.name}" style="aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius-md);margin-bottom:12px;" loading="lazy">` : '<div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);border-radius:var(--radius-md);margin-bottom:12px;color:var(--text-muted);"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>'}
+                    <span class="badge badge-accent" style="margin-bottom:8px;">${course.category}</span>
+                    <h3 style="font-weight:700;font-size:1rem;color:var(--text-primary);margin-bottom:8px;">${course.name}</h3>
+                    <span class="badge badge-success">Lifetime Access</span>
+                    ${course.whatsappLink && course.whatsappLink.trim() !== '' ? `
+                      <a href="${course.whatsappLink}" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm btn-block" style="margin-top:12px;" onclick="event.stopPropagation();">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        Access Course
+                      </a>
+                    ` : '<p style="font-size:0.75rem;color:var(--text-muted);margin-top:8px;">Access Link available নয়</p>'}
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          `;
+        }
+        window.renderMyCourses = renderMyCourses;
+
+        // ---------- Wallet section (dashboard) ----------
+        function renderWalletSection() {
+            setActiveDashItem('dash-wallet');
+            const content = document.getElementById('dashboard-content');
+            if (!content) return;
+            content.innerHTML = `
+            <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:16px;">Wallet</h2>
+            <div class="card" style="padding:24px;text-align:center;margin-bottom:20px;">
+              <div style="font-size:0.875rem;color:var(--text-muted);margin-bottom:4px;">বর্তমান ব্যালেন্স</div>
+              <div style="font-size:2.5rem;font-weight:800;color:var(--accent-light);">৳${walletBalance}</div>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" onclick="openDepositModal()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+              Add Money (bKash/Nagad)
+            </button>
+            <div id="deposit-history-container" style="margin-top:24px;">
+              <h3 style="font-size:1rem;font-weight:600;color:var(--text-secondary);margin-bottom:12px;">Transaction History</h3>
+              <div id="txn-list"></div>
+            </div>
+          `;
+            loadTransactionHistory();
+        }
+        window.renderWalletSection = renderWalletSection;
+
+        // ---------- Wallet page ----------
+        function renderWalletPage() {
+            if (!currentUser) {
+                navigateTo('login');
+                return;
+            }
+            renderDashboardSidebar();
+            setActiveDashItem('dash-wallet');
+            const walletSidebar = document.getElementById('wallet-sidebar');
+            if (walletSidebar) walletSidebar.innerHTML = renderDashboardSidebarHTML();
+            const content = document.getElementById('wallet-content');
+            if (content) {
+                content.innerHTML = `
+              <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:16px;">Wallet</h2>
+              <div class="card" style="padding:24px;text-align:center;margin-bottom:20px;">
+                <div style="font-size:0.875rem;color:var(--text-muted);margin-bottom:4px;">বর্তমান ব্যালেন্স</div>
+                <div style="font-size:2.5rem;font-weight:800;color:var(--accent-light);">৳${walletBalance}</div>
+              </div>
+              <button class="btn btn-primary btn-lg btn-block" onclick="openDepositModal()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                Add Money (bKash/Nagad)
+              </button>
+              <div style="margin-top:24px;">
+                <h3 style="font-size:1rem;font-weight:600;color:var(--text-secondary);margin-bottom:12px;">Transaction History</h3>
+                <div id="txn-list-wallet"></div>
+              </div>
+            `;
+                loadTransactionHistoryForWallet();
+            }
+        }
+        window.renderWalletPage = renderWalletPage;
+
+        function renderDashboardSidebarHTML() {
+            const items = [{
+                    id: 'dash-overview',
+                    icon: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>',
+                    label: 'Dashboard',
+                    action: 'renderDashboard'
+                },
+                {
+                    id: 'dash-courses-all',
+                    icon: '<svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+                    label: 'Courses',
+                    action: 'renderAllCoursesInDashboard'
+                },
+                {
+                    id: 'dash-courses',
+                    icon: '<svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+                    label: 'My Courses',
+                    action: 'renderMyCourses'
+                },
+                {
+                    id: 'dash-wallet',
+                    icon: '<svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M16 12h2"/><path d="M6 10h4"/></svg>',
+                    label: 'Wallet',
+                    action: 'renderWalletSection'
+                },
+                {
+                    id: 'dash-history',
+                    icon: '<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+                    label: 'Purchase History',
+                    action: 'renderPurchaseHistory'
+                },
+                {
+                    id: 'dash-profile',
+                    icon: '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+                    label: 'Profile',
+                    action: 'renderProfileSection'
+                },
+                {
+                    id: 'dash-support',
+                    icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+                    label: 'Support',
+                    action: 'renderSupportSection'
+                },
+            ];
+                return items.map(item =>
+        `<button class="dashboard-nav-item" data-dash="${item.id}" onclick="navigateTo('dashboard'); setTimeout(() => { ${item.action}(); }, 60);">` +
+        `<span class="dni-icon">${item.icon}</span>${item.label}</button>`
+    ).join('');
+}
+
+        // ---------- Transaction history ----------
+        function loadTransactionHistory() {
+            if (!currentUser) return;
+            const txnRef = ref(db, 'transactions');
+            onValue(txnRef, (snapshot) => {
+                const txns = [];
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    Object.keys(data).forEach(key => {
+                        if (data[key].uid === currentUser.uid) {
+                            txns.push({
+                                id: key,
+                                ...data[key]
+                            });
+                        }
+                    });
+                }
+                txns.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                const container = document.getElementById('txn-list');
+                if (container) {
+                    if (txns.length === 0) {
+                        container.innerHTML =
+                            '<p style="color:var(--text-muted);font-size:0.875rem;">কোনো ট্রানজেকশন নেই।</p>';
+                    } else {
+                        container.innerHTML = txns.slice(0, 20).map(t => `
+                  <div class="card" style="padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+                    <span style="font-weight:600;color:var(--text-primary);">${t.type === 'purchase' ? 'Purchase' : 'Deposit'}</span>
+                    <span class="${t.type === 'purchase' ? 'badge badge-error' : 'badge badge-success'}">${t.type === 'purchase' ? '-' : '+'}৳${t.amount}</span>
+                    <span style="font-size:0.75rem;color:var(--text-muted);">${new Date(t.createdAt).toLocaleDateString('bn-BD')}</span>
+                  </div>
+                `).join('');
+                    }
+                }
+            });
+        }
+
+        function loadTransactionHistoryForWallet() {
+            if (!currentUser) return;
+            const txnRef = ref(db, 'transactions');
+            onValue(txnRef, (snapshot) => {
+                const txns = [];
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    Object.keys(data).forEach(key => {
+                        if (data[key].uid === currentUser.uid) {
+                            txns.push({
+                                id: key,
+                                ...data[key]
+                            });
+                        }
+                    });
+                }
+                txns.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                const container = document.getElementById('txn-list-wallet');
+                if (container) {
+                    if (txns.length === 0) {
+                        container.innerHTML =
+                            '<p style="color:var(--text-muted);font-size:0.875rem;">কোনো ট্রানজেকশন নেই।</p>';
+                    } else {
+                        container.innerHTML = txns.slice(0, 20).map(t => `
+                  <div class="card" style="padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+                    <span style="font-weight:600;color:var(--text-primary);">${t.type === 'purchase' ? 'Purchase' : 'Deposit'}</span>
+                    <span class="${t.type === 'purchase' ? 'badge badge-error' : 'badge badge-success'}">${t.type === 'purchase' ? '-' : '+'}৳${t.amount}</span>
+                    <span style="font-size:0.75rem;color:var(--text-muted);">${new Date(t.createdAt).toLocaleDateString('bn-BD')}</span>
+                  </div>
+                `).join('');
+                    }
+                }
+            });
+        }
+
+        // ---------- Deposit modal ----------
+        function openDepositModal() {
+            if (!currentUser) {
+                showToast('আগে লগইন করুন', 'warning');
+                navigateTo('login');
+                return;
+            }
+            showModal('Add Money (bKash/Nagad)', `
+            <p style="margin-bottom:16px;color:var(--text-muted);font-size:0.875rem;">
+              ম্যানুয়াল ডিপোজিট প্রক্রিয়া। টাকা পাঠিয়ে নিচের ফর্মটি পূরণ করুন।
+              অ্যাডমিন অ্যাপ্রুভালের পর ওয়ালেটে টাকা যোগ হবে।
+            </p>
+            <div class="input-group">
+              <label class="input-label">Payment Method</label>
+              <select class="input-field" id="deposit-method">
+                <option value="bkash">bKash</option>
+                <option value="nagad">Nagad</option>
+              </select>
+            </div>
+            <div id="payment-instructions" style="padding:12px;background:var(--bg-surface);border-radius:var(--radius-md);margin-bottom:16px;font-size:0.875rem;color:var(--text-secondary);">
+              <div style="font-weight:600;margin-bottom:4px;" id="payment-number-label">bKash Number:</div>
+              <div style="font-size:1.1rem;font-weight:700;color:var(--accent-light);" id="payment-number-value">${adminSettings.bkashNumber || 'N/A'}</div>
+              <div style="font-size:0.75rem;color:var(--text-dark);margin-top:4px;">উপরের নম্বরে টাকা পাঠিয়ে নিচের ফর্মটি পূরণ করুন।</div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Amount (৳)</label>
+              <input class="input-field" id="deposit-amount" type="number" min="1" placeholder="টাকার পরিমাণ">
+            </div>
+            <div class="input-group">
+              <label class="input-label">আপনার Sender Number</label>
+              <input class="input-field" id="deposit-sender" type="text" placeholder="যে নম্বর থেকে টাকা পাঠিয়েছেন">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Transaction ID / Reference</label>
+              <input class="input-field" id="deposit-txnid" type="text" placeholder="bKash/Nagad Transaction ID">
+            </div>
+            <button class="btn btn-primary btn-block" onclick="submitDepositRequest()">ডিপোজিট রিকোয়েস্ট জমা দিন</button>
+          `);
+            const methodSelect = document.getElementById('deposit-method');
+            methodSelect?.addEventListener('change', (e) => {
+                const method = e.target.value;
+                const label = document.getElementById('payment-number-label');
+                const value = document.getElementById('payment-number-value');
+                if (label && value) {
+                    label.textContent = method === 'bkash' ? 'bKash Number:' : 'Nagad Number:';
+                    value.textContent = method === 'bkash' ? (adminSettings.bkashNumber || 'N/A') : (adminSettings
+                        .nagadNumber || 'N/A');
+                }
+            });
+        }
+        window.openDepositModal = openDepositModal;
+
+        async function submitDepositRequest() {
+            const method = document.getElementById('deposit-method')?.value;
+            const amount = parseFloat(document.getElementById('deposit-amount')?.value);
+            const senderNumber = document.getElementById('deposit-sender')?.value?.trim();
+            const txnId = document.getElementById('deposit-txnid')?.value?.trim();
+            if (!method || !amount || amount <= 0 || !senderNumber || !txnId) {
+                showToast('সব ফিল্ড সঠিকভাবে পূরণ করুন', 'error');
+                return;
+            }
+            closeModal();
+            try {
+                const depositRef = push(ref(db, 'deposits'));
+                await set(depositRef, {
+                    uid: currentUser.uid,
+                    amount,
+                    paymentMethod: method,
+                    senderNumber,
+                    transactionId: txnId,
+                    submittedAt: Date.now(),
+                    status: 'pending',
+                    adminNote: ''
+                });
+                showToast('পেমেন্ট রিকোয়েস্ট সফলভাবে জমা হয়েছে! অ্যাডমিন অ্যাপ্রুভালের পর ওয়ালেটে টাকা যোগ হবে।', 'success');
+            } catch (err) {
+                showToast('Something went wrong: ' + err.message, 'error');
+            }
+        }
+        window.submitDepositRequest = submitDepositRequest;
+
+        // ---------- Purchase history ----------
+        function renderPurchaseHistory() {
+            setActiveDashItem('dash-history');
+            const content = document.getElementById('dashboard-content');
+            if (!content) return;
+            const sorted = [...userPurchases].sort((a, b) => (b.date || 0) - (a.date || 0));
+            if (sorted.length === 0) {
+                content.innerHTML = `
+              <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:16px;">Purchase History</h2>
+              <div class="empty-state">
+                <div class="empty-state-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                <div class="empty-state-title">কোনো Purchase নেই</div>
+              </div>
+            `;
+                return;
+            }
+            content.innerHTML = `
+            <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:16px;">Purchase History</h2>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr><th>কোর্স</th><th>অর্ডার ID</th><th>পরিমাণ</th><th>তারিখ</th><th>স্ট্যাটাস</th></tr>
+                </thead>
+                <tbody>
+                  ${sorted.map(p => `
+                    <tr>
+                      <td style="font-weight:600;">${p.courseName || 'Course'}</td>
+                      <td style="font-size:0.75rem;">${p.orderId || 'N/A'}</td>
+                      <td>৳${p.amount}</td>
+                      <td style="font-size:0.8rem;">${new Date(p.date).toLocaleDateString('bn-BD')}</td>
+                      <td><span class="badge badge-success">${p.status || 'completed'}</span></td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          `;
+        }
+        window.renderPurchaseHistory = renderPurchaseHistory;
+
+        // ---------- Profile section ----------
+        function renderProfileSection() {
+            setActiveDashItem('dash-profile');
+            const content = document.getElementById('dashboard-content');
+            if (!content) return;
+            content.innerHTML = `
+            <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:16px;">Profile</h2>
+            <div class="form-section">
+              <div class="input-group">
+                <label class="input-label">নাম</label>
+                <input class="input-field" id="profile-name" value="${currentUserData?.name || currentUser?.displayName || ''}">
+              </div>
+              <div class="input-group">
+                <label class="input-label">ইমেইল</label>
+                <input class="input-field" value="${currentUser?.email || ''}" disabled>
+              </div>
+              <button class="btn btn-primary" onclick="updateProfileName()">নাম আপডেট করুন</button>
+            </div>
+            <div class="form-section">
+              <h3 class="form-section-title">পাসওয়ার্ড পরিবর্তন</h3>
+              <div class="input-group">
+                <label class="input-label">নতুন পাসওয়ার্ড</label>
+                <input class="input-field" id="new-password" type="password" placeholder="নতুন পাসওয়ার্ড">
+              </div>
+              <button class="btn btn-primary" onclick="changePassword()">পাসওয়ার্ড পরিবর্তন</button>
+            </div>
+          `;
+        }
+        window.renderProfileSection = renderProfileSection;
+
+        async function updateProfileName() {
+            const newName = document.getElementById('profile-name')?.value?.trim();
+            if (!newName) {
+                showToast('নাম লিখুন', 'error');
+                return;
+            }
+            try {
+                await updateProfile(auth.currentUser, {
+                    displayName: newName
+                });
+                await update(ref(db, `users/${currentUser.uid}`), {
+                    name: newName
+                });
+                if (currentUserData) currentUserData.name = newName;
+                renderNavActions();
+                showToast('নাম আপডেট হয়েছে!', 'success');
+                renderProfileSection();
+            } catch (err) {
+                showToast('Something went wrong: ' + err.message, 'error');
+            }
+        }
+        window.updateProfileName = updateProfileName;
+
+        async function changePassword() {
+            const newPass = document.getElementById('new-password')?.value;
+            if (!newPass || newPass.length < 6) {
+                showToast('পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে', 'error');
+                return;
+            }
+            try {
+                await updatePassword(auth.currentUser, newPass);
+                showToast('পাসওয়ার্ড পরিবর্তন হয়েছে!', 'success');
+                document.getElementById('new-password').value = '';
+            } catch (err) {
+                if (err.code === 'auth/requires-recent-login') {
+                    showToast('নিরাপত্তার জন্য আবার লগইন করুন, তারপর চেষ্টা করুন।', 'warning');
+                } else {
+                    showToast(getAuthErrorMessage(err), 'error');
+                }
+            }
+        }
+        window.changePassword = changePassword;
+
+        // ---------- Support section (Direct Email) ----------
+        function renderSupportSection() {
+            setActiveDashItem('dash-support');
+            const content = document.getElementById('dashboard-content');
+            if (!content) return;
+            content.innerHTML = `
+            <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:16px;">সাপোর্ট</h2>
+            <div class="card" style="padding:24px;text-align:center;">
+              <p style="color:var(--text-muted);margin-bottom:16px;">আপনার সমস্যা বা প্রশ্ন সরাসরি আমাদের ইমেইলে পাঠান।</p>
+              <button class="btn btn-primary btn-lg" onclick="openDirectSupport()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Direct Support (Email)
+              </button>
+            </div>
+          `;
+        }
+        window.renderSupportSection = renderSupportSection;
+
+        function openDirectSupport() {
+            const email = adminSettings.supportEmail || 'support@impactmedia.com';
+            const subject = encodeURIComponent('Website Support');
+            const body = encodeURIComponent(
+                `Hello,\n\nI need help regarding my account/course/purchase.\n\n` +
+                `My registered email/username: ${currentUser?.email || 'Not logged in'}\n` +
+                `My issue:\n\nThank you.`
+            );
+            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        }
+        window.openDirectSupport = openDirectSupport;
+
+        // ---------- Profile page ----------
+        function renderProfilePage() {
+            if (!currentUser) {
+                navigateTo('login');
+                return;
+            }
+            renderDashboardSidebar();
+            setActiveDashItem('dash-profile');
+            const sidebar = document.getElementById('profile-sidebar');
+            if (sidebar) sidebar.innerHTML = renderDashboardSidebarHTML();
+            const content = document.getElementById('profile-content');
+            if (content) {
+                content.innerHTML = `
+              <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:16px;">Profile</h2>
+              <div class="form-section">
+                <div class="input-group">
+                  <label class="input-label">নাম</label>
+                  <input class="input-field" id="profile-name-page" value="${currentUserData?.name || currentUser?.displayName || ''}">
+                </div>
+                <div class="input-group">
+                  <label class="input-label">ইমেইল</label>
+                  <input class="input-field" value="${currentUser?.email || ''}" disabled>
+                </div>
+                <button class="btn btn-primary" onclick="updateProfileNamePage()">নাম আপডেট করুন</button>
+              </div>
+              <div class="form-section">
+                <h3 class="form-section-title">পাসওয়ার্ড পরিবর্তন</h3>
+                <div class="input-group">
+                  <label class="input-label">নতুন পাসওয়ার্ড</label>
+                  <input class="input-field" id="new-password-page" type="password" placeholder="নতুন পাসওয়ার্ড">
+                </div>
+                <button class="btn btn-primary" onclick="changePasswordPage()">পাসওয়ার্ড পরিবর্তন</button>
+              </div>
+              <button class="btn btn-danger btn-block" onclick="handleLogout()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                লগআউট করুন
+              </button>
+            `;
+            }
+        }
+        window.renderProfilePage = renderProfilePage;
+
+        async function updateProfileNamePage() {
+            const newName = document.getElementById('profile-name-page')?.value?.trim();
+            if (!newName) {
+                showToast('নাম লিখুন', 'error');
+                return;
+            }
+            try {
+                await updateProfile(auth.currentUser, {
+                    displayName: newName
+                });
+                await update(ref(db, `users/${currentUser.uid}`), {
+                    name: newName
+                });
+                if (currentUserData) currentUserData.name = newName;
+                renderNavActions();
+                showToast('নাম আপডেট হয়েছে!', 'success');
+                renderProfilePage();
+            } catch (err) {
+                showToast('Something went wrong: ' + err.message, 'error');
+            }
+        }
+        window.updateProfileNamePage = updateProfileNamePage;
+
+        async function changePasswordPage() {
+            const newPass = document.getElementById('new-password-page')?.value;
+            if (!newPass || newPass.length < 6) {
+                showToast('পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে', 'error');
+                return;
+            }
+            try {
+                await updatePassword(auth.currentUser, newPass);
+                showToast('পাসওয়ার্ড পরিবর্তন হয়েছে!', 'success');
+                document.getElementById('new-password-page').value = '';
+            } catch (err) {
+                showToast(getAuthErrorMessage(err), 'error');
+            }
+        }
+        window.changePasswordPage = changePasswordPage;
+
+        // ---------- renderCoursesPage ----------
+        function renderCoursesPage() {
+            renderAllCourses();
+        }
+
+        function renderCourseDetailIfNeeded() {
+            if (currentView === 'course-detail') {
+                const detailContent = document.getElementById('course-detail-content');
+                if (detailContent && !detailContent.innerHTML.trim()) {
+                    navigateTo('courses');
+                }
+            }
+        }
+
+        // ---------- Scroll listener ----------
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('desktop-nav');
+            if (nav && window.scrollY > 20) {
+                nav.classList.add('scrolled');
+            } else if (nav) {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // ---------- INITIALIZE ----------
+        async function initialize() {
+            seedDefaultData();
+            loadSettings();
+            loadServices();
+            loadCourses();
+            loadReviews();
+            loadFaqs();
+
+            const authListener = onAuthStateChanged(auth, async (user) => {
+                currentUser = user;
+                if (user) {
+                    try {
+                        const userRef = ref(db, `users/${user.uid}`);
+                        const snapshot = await get(userRef);
+                        if (snapshot.exists()) {
+                            currentUserData = snapshot.val();
+                        } else {
+                            currentUserData = {
+                                name: user.displayName || 'User',
+                                email: user.email,
+                                photoURL: user.photoURL || '',
+                                role: 'student',
+                                createdAt: Date.now(),
+                                status: 'active'
+                            };
+                            await set(userRef, currentUserData);
+                            await set(ref(db, `wallets/${user.uid}`), {
+                                balance: 0
+                            });
+                        }
+                        await loadUserPurchases();
+                        loadWalletBalance();
+                    } catch (err) {
+                        console.error('User data load error:', err);
+                    }
+                } else {
+                    currentUserData = null;
+                    userPurchases = [];
+                    walletBalance = 0;
+                    ratingState = {};
+                }
+                renderNavActions();
+                renderDashboardSidebar();
+                if (currentView === 'profile') renderProfilePage();
+                if (currentView === 'wallet') renderWalletPage();
+                if (currentView === 'dashboard') renderDashboard();
+                if (currentView === 'course-detail') renderCourseDetailIfNeeded();
+
+                if (!authStateReady) {
+                    authStateReady = true;
+                    navigateTo('home');
+                    document.getElementById('loading-overlay')?.classList.add('hidden');
+                    setTimeout(() => {
+                        document.getElementById('loading-overlay')?.remove();
+                    }, 400);
+                }
+            });
+
+            setTimeout(() => {
+                if (!authStateReady) {
+                    authStateReady = true;
+                    navigateTo('home');
+                    document.getElementById('loading-overlay')?.classList.add('hidden');
+                    setTimeout(() => {
+                        document.getElementById('loading-overlay')?.remove();
+                    }, 400);
+                }
+            }, 3000);
+
+            renderNavActions();
+        }
+
+        initialize().catch(err => {
+            console.error('Init error:', err);
+            document.getElementById('loading-overlay')?.classList.add('hidden');
+            showToast('App initialization error: ' + err.message, 'error');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+
+</html>
