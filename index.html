@@ -49,36 +49,75 @@
       }
     </script>
 
-    <!-- ✅ ১২. অ্যাডভান্সড স্কিমা মার্কআপ (গুগলের জন্য কোর্সের তথ্য) -->
+<!-- ✅ ১২. গুগলের AI-এর জন্য সুপার স্কিমা মার্কআপ -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
-  "name": "Impact Media BD",
-  "alternateName": ["IMBD Academy", "Impact Media"],
-  "url": "https://impactmediabd.onrender.com/",
-  "description": "Impact Media BD-তে শিখুন YouTube Automation, Graphics Design, AI Apps & Web Development। এটি একটি প্রিমিয়াম ডিজিটাল এডুকেশন প্ল্যাটফর্ম।",
-  "sameAs": [
-    "https://youtube.com/@impactmediaofc"
-  ],
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Digital Media Courses",
-    "itemListElement": [
-      {
-        "@type": "Course",
-        "name": "Faceless YouTube Channel Automation",
-        "description": "নিজের মুখ বা ক্যামেরা ছাড়াই YouTube Channel পরিচালনার পদ্ধতি শিখুন।"
-      },
-      {
-        "@type": "Course",
-        "name": "AI-Powered App & Website Development",
-        "description": "AI-এর শক্তি ব্যবহার করে Zero থেকে Apps & Websites তৈরি করা শিখুন।"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "Impact Media BD",
+      "alternateName": ["impactmediabd", "IMBD Academy"],
+      "url": "https://impactmediabd.onrender.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://impactmediabd.onrender.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
       }
-    ]
-  }
+    },
+    {
+      "@type": "EducationalOrganization",
+      "name": "Impact Media BD",
+      "alternateName": ["IMBD Academy", "Impact Media", "impactmediabd"],
+      "url": "https://impactmediabd.onrender.com/",
+      "description": "Impact Media BD হলো বাংলাদেশের একটি প্রিমিয়াম ডিজিটাল এডুকেশন প্ল্যাটফর্ম। এখানে YouTube Automation, Graphics Design, AI Apps এবং Web Development শেখানো হয়।",
+      "sameAs": [
+        "https://youtube.com/@impactmediaofc"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Digital Media Courses",
+        "itemListElement": [
+          {
+            "@type": "Course",
+            "name": "Faceless YouTube Channel Automation",
+            "description": "নিজের মুখ বা ক্যামেরা ছাড়াই YouTube Channel পরিচালনার পদ্ধতি শিখুন।"
+          },
+          {
+            "@type": "Course",
+            "name": "AI-Powered App & Website Development",
+            "description": "AI-এর শক্তি ব্যবহার করে Zero থেকে Apps & Websites তৈরি করা শিখুন।"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "কোর্স কেনার পর কতদিন অ্যাক্সেস পাবো?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "হ্যাঁ, সব কোর্সে আপনি আজীবন (Lifetime) অ্যাক্সেস পাবেন। একবার কিনলে কোনো সময়সীমা ছাড়াই সারাজীবন কোর্সটি দেখতে পারবেন।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "পেমেন্ট কীভাবে করবো?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "আপনি বিকাশ (bKash) বা নগদ (Nagad)-এর মাধ্যমে সরাসরি পেমেন্ট করতে পারবেন। পেমেন্ট করার পর অ্যাডমিন অ্যাপ্রুভাল পেলেই আপনার কোর্স অ্যাক্সেস চালু হয়ে যাবে।"
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
+
+<!-- 👇 এখান থেকে তোমার আসল CSS শুরু (এখানে হাত দেবে না) -->
+<style>
     
     <!-- 👇 এখান থেকে তোমার আসল CSS শুরু হবে (এখানে কোনো প্লেসহোল্ডার টেক্সট থাকবে না) -->
     <style>
